@@ -1,0 +1,53 @@
+@import './reset.less';
+
+.loop(@counter) when (@counter > 0) {
+  .p-@{counter} {
+    padding: (1px * @counter);
+  }
+  .pt-@{counter} {
+    padding-top: (1px * @counter);
+  }
+  .pr-@{counter} {
+    padding-right: (1px * @counter);
+  }
+  .pb-@{counter} {
+    padding-bottom: (1px * @counter);
+  }
+  .pl-@{counter} {
+    padding-left: (1px * @counter);
+  }
+  .m-@{counter} {
+    margin: (1px * @counter);
+  }
+  .mt-@{counter} {
+    margin-top: (1px * @counter);
+  }
+  .mr-@{counter} {
+    margin-right: (1px * @counter);
+  }
+  .mb-@{counter} {
+    margin-bottom: (1px * @counter);
+  }
+  .ml-@{counter} {
+    margin-left: (1px * @counter);
+  }
+  .loop((@counter - 1));    // 递归调用自身
+}
+.loop(20);
+
+.ellipsis {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.w-100 {
+  width: 100%;
+}
+
+.hand {
+  cursor: pointer;
+}
+.float-right {
+  float: right;
+}
