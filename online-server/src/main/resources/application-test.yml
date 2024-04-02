@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: //数据库连接
+    username: 数据库账号
+    password: 数据库密码
+  main:
+    allow-circular-references: true
+
+server:
+  port: 9090
+
+#mybatis:
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  configLocation: classpath:mybatis.xml
+
+
+
+project:
+  env: test
+
+logging:
+  level:
+    org:
+      mybatis=DEBUG:
+
+
+

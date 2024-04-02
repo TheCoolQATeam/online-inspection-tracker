@@ -1,0 +1,11 @@
+# 线上巡检系统
+
+## 项目启动访问
+http://127.0.0.1:9090/patrol/onlines/selectInfo
+
+## 区分环境配置
+https://blog.csdn.net/weixin_33005117/article/details/127872557
+
+## 接口
+### 1、 巡检H5页面列表：/patrol/onlines/selectInfo
+### 2、 查询用例执行结果：/patrol/onlines/getCaseInfo?caseId=11&pageNum=1&pageSize=10
