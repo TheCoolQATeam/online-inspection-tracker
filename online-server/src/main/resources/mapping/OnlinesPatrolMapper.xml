@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlines.mapper.OnlinesPatrolMapper">
+  <resultMap id="BaseResultMap" type="com.onlines.pojo.OnlinesPatrol">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="htmlinfo" jdbcType="VARCHAR" property="htmlinfo" />
+    <result column="groupId" jdbcType="VARCHAR" property="groupId" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="datum_address" jdbcType="VARCHAR" property="datumAddress" />
+    <result column="datum_createtime" jdbcType="TIMESTAMP" property="datumCreatetime" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="need_login" jdbcType="INTEGER" property="needLogin" />
+  </resultMap>
+  <resultMap id="CaseInfoMap" type="com.onlines.pojo.CaseInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="case_id" jdbcType="VARCHAR" property="caseId" />
+    <result column="states" jdbcType="VARCHAR" property="states" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="response_time" jdbcType="VARCHAR" property="responseTime" />
+    <result column="failed_reason" jdbcType="VARCHAR" property="failedReason" />
+  </resultMap>
+  <resultMap id="testPlanMap" type="com.onlines.pojo.TestPlanInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="jenkins_id" jdbcType="VARCHAR" property="jenkinsId" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="duration" jdbcType="VARCHAR" property="duration" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="passed_num" jdbcType="INTEGER" property="passedNum" />
+    <result column="failed_num" jdbcType="INTEGER" property="failedNum" />
+    <result column="skiped_num" jdbcType="INTEGER" property="skippedNum" />
+    <result column="total_num" jdbcType="INTEGER" property="totalNum" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, url, title, htmlinfo, `groupId`, createTime, datum_address, datum_createtime, username, need_login,
+    `uid`
+  </sql>
+  <sql id="Case_Column_List">
+    id, create_time, response_time, case_id, states, failed_reason
+  </sql>
+  <select id="selectByExample" parameterType="com.onlines.pojo.OnlinesPatrolExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from onlinespatrol
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from onlinespatrol
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from onlinespatrol
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.onlines.pojo.OnlinesPatrolExample">
+    delete from onlinespatrol
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.onlines.pojo.OnlinesPatrol">
+    insert into onlinespatrol (id, url, title,
+    htmlinfo, `groupId`, createTime,
+    datum_address, datum_createtime, username, need_login,
+    `uid`)
+    values (#{id,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+    #{htmlinfo,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP},
+    #{datumAddress,jdbcType=VARCHAR}, #{datumCreatetime,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR},
+    #{needLogin,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.onlines.pojo.OnlinesPatrol">
+    insert into onlinespatrol
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="htmlinfo != null">
+        htmlinfo,
+      </if>
+      <if test="groupId != null">
+        `groupId`,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="datumAddress != null">
+        datum_address,
+      </if>
+      <if test="datumCreatetime != null">
+        datum_createtime,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="uid != null">
+        `uid`,
+      </if>
+      <if test="needLogin != null">
+        `need_login`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="htmlinfo != null">
+        #{htmlinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datumAddress != null">
+        #{datumAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="datumCreatetime != null">
+        #{datumCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="needLogin != null">
+        #{needLogin,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.onlines.pojo.OnlinesPatrolExample" resultType="java.lang.Long">
+    select count(*) from onlinespatrol
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update onlinespatrol
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.htmlinfo != null">
+        htmlinfo = #{record.htmlinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupId != null">
+        `groupId` = #{record.groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.datumAddress != null">
+        datum_address = #{record.datumAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datumCreatetime != null">
+        datum_createtime = #{record.datumCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null">
+        `uid` = #{record.uid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update onlinespatrol
+    set id = #{record.id,jdbcType=INTEGER},
+    url = #{record.url,jdbcType=VARCHAR},
+    title = #{record.title,jdbcType=VARCHAR},
+    htmlinfo = #{record.htmlinfo,jdbcType=VARCHAR},
+    `groupId` = #{record.groupId,jdbcType=VARCHAR},
+    createTime = #{record.createtime,jdbcType=TIMESTAMP},
+    datum_address = #{record.datumAddress,jdbcType=VARCHAR},
+    datum_createtime = #{record.datumCreatetime,jdbcType=TIMESTAMP},
+    username = #{record.username,jdbcType=VARCHAR},
+    `uid` = #{record.uid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlines.pojo.OnlinesPatrol">
+    update onlinespatrol
+    <set>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="htmlinfo != null">
+        htmlinfo = #{htmlinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        `groupId` = #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datumAddress != null">
+        datum_address = #{datumAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="datumCreatetime != null">
+        datum_createtime = #{datumCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        `uid` = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="needLogin != null">
+        `need_login` = #{needLogin,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlines.pojo.OnlinesPatrol">
+    update onlinespatrol
+    set url = #{url,jdbcType=VARCHAR},
+    title = #{title,jdbcType=VARCHAR},
+    htmlinfo = #{htmlinfo,jdbcType=VARCHAR},
+    `groupId` = #{groupId,jdbcType=VARCHAR},
+    createTime = #{createtime,jdbcType=TIMESTAMP},
+    datum_address = #{datumAddress,jdbcType=VARCHAR},
+    datum_createtime = #{datumCreatetime,jdbcType=TIMESTAMP},
+    username = #{username,jdbcType=VARCHAR},
+    `uid` = #{uid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+<!--  <select id="selectByTitle" parameterType="java.lang.String" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from onlinespatrol-->
+<!--    where title = #{title,jdbcType=VARCHAR}-->
+<!--  </select>-->
+
+
+
+  <select id="selectByDatumAddress" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from onlinespatrol
+    where datum_address = #{datum_address,jdbcType=VARCHAR}
+  </select>
+<!--  <select id="selectByHtmlInfo" parameterType="java.lang.String" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from onlinespatrol-->
+<!--  </select>-->
+  <select id="getCaseBaseInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from onlinespatrol
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <insert id="insertInfo" parameterType="java.lang.String">
+    INSERT INTO OnlinesPatrol (url,title,htmlinfo,groupId, need_login)
+    VALUES(#{ulr},#{title},#{htmlinfo},#{groupId},#{needLogin})
+  </insert>
+
+
+  <select id="selectAll" parameterType="java.lang.String"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    FROM onlinespatrol
+    <!--    where user="用户端";-->
+  </select>
+  <select id="deleteInfo" parameterType="java.lang.String"  resultMap="BaseResultMap">
+    delete
+    FROM onlinespatrol
+    where title=#{title,jdbcType=VARCHAR}
+    <!--    where user="用户端";-->
+  </select>
+  <select id="getCaseInfo" parameterType="java.lang.String"  resultMap="CaseInfoMap">
+    select
+    <include refid="Case_Column_List" />
+    FROM case_response c
+    where case_id = #{id,jdbcType=VARCHAR} and states in (1, 2)
+    <if test="beginDate != null and endDate != null">
+      AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{beginDate},'%Y-%m-%d')
+      AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
+    </if>
+    order by create_time desc
+  </select>
+  <select id="getFailedCaseInfo"  resultMap="CaseInfoMap">
+    select
+    o.title,
+    c.id,
+    c.case_id,
+    c.create_time, c.response_time, c.case_id, c.states, c.failed_reason
+    <!--    <include refid="Case_Column_List" />-->
+    FROM case_response c
+    left join onlinespatrol o on c.case_id = o.id
+    where states =2
+    <if test="group != null and group != ''">
+      AND  o.groupId = #{group}
+    </if>
+    <if test="beginDate != null and endDate != null">
+      AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{beginDate},'%Y-%m-%d')
+      AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
+    </if>
+    order by create_time desc
+  </select>
+  <select id="getFailedCaseCount"  resultType="Integer">
+    select count(*)
+    FROM case_response c left join onlinespatrol o on c.case_id = o.id
+    where c.states =2
+    <if test="group != null">
+      AND o.groupId = #{group}
+    </if>
+    <if test="beginDate != null and endDate != null">
+      AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{beginDate},'%Y-%m-%d')
+      AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
+    </if>
+  </select>
+  <select id="getTimeoutCaseInfo"  resultMap="CaseInfoMap">
+    select
+    o.title,
+    c.id,
+    c.case_id,
+    c.create_time,MAX(c.response_time) as response_time,  c.states, c.failed_reason, count(*)
+<!--    <include refid="Case_Column_List" />-->
+    FROM case_response c
+    left join onlinespatrol o on c.case_id = o.id
+    where c.response_time>3000
+    <if test="group != null and group != ''">
+      AND  o.groupId = #{group}
+    </if>
+    <if test="beginDate != null and endDate != null">
+      AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{beginDate},'%Y-%m-%d')
+      AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
+    </if>
+    group by c.case_id
+    order by create_time desc
+  </select>
+  <select id="getPlanInfo"  resultMap="CaseInfoMap">
+    select
+    o.title,
+    c.id,
+    c.case_id,
+    c.create_time, c.response_time, c.case_id, c.states, c.failed_reason
+    <!--    <include refid="Case_Column_List" />-->
+    FROM test_plan_result c
+  </select>
+  <select id="getTimeoutCaseCount"  resultType="Integer">
+    select count(*)
+    FROM case_response c left join onlinespatrol o on c.case_id = o.id
+    where c.response_time>3000
+    <if test="group != null and group != ''">
+      AND  o.groupId = #{group}
+    </if>
+    <if test="beginDate != null and endDate != null">
+      AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{beginDate},'%Y-%m-%d')
+      AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
+    </if>
+  </select>
+  <select id="getPlanCount"  resultType="Integer">
+    select count(*)
+    FROM test_plan_result c
+    where 1=1
+    <if test="beginDate != null and endDate != null">
+      AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{beginDate},'%Y-%m-%d')
+      AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
+    </if>
+  </select>
+
+  <select id="getOnlineList"  resultMap="BaseResultMap">
+    select *
+    FROM onlinespatrol
+    where 1=1
+    <if test="groupId != null and groupId != ''">
+       AND  groupId = #{groupId,jdbcType=VARCHAR}
+    </if>
+    <if test="title != null and title != ''">
+      AND (title like concat('%', #{title,jdbcType=VARCHAR}, '%') OR htmlinfo like concat('%', #{title,jdbcType=VARCHAR}, '%'))
+    </if>
+    <if test="startTime != null and startTime !='' and endTime != null and endTime !=''">
+      AND DATE_FORMAT(createTime,'%Y-%m-%d') &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d')
+      AND DATE_FORMAT(createTime,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endTime},'%Y-%m-%d')
+    </if>
+  </select>
+  <select id="getTestPlanList"  resultMap="testPlanMap">
+    select *
+    FROM test_plan_result
+    where 1=1
+    <if test="beginDate != null and endDate != null">
+      AND DATE_FORMAT(begin_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{beginDate},'%Y-%m-%d')
+      AND DATE_FORMAT(begin_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
+    </if>
+    order by begin_time desc
+  </select>
+
+
+  <select id="selectByTitle" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from onlinespatrol
+    where title = #{title,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectDate"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from onlinespatrol
+  </select>
+
+<!--  <select id="selectByDatumAddress" parameterType="java.lang.String" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from onlinespatrol-->
+<!--    where datum_address = #{datum_address,jdbcType=VARCHAR}-->
+<!--  </select>-->
+  <select id="selectByHtmlInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from onlinespatrol
+  </select>
+</mapper>

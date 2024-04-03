@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name='线上监控自动化测试' data-provider-thread-count="1">
+	<test verbose="2" preserve-order="true" name="交易平台主要页面/接口巡检功能" enabled="true">
+		<classes>
+			<class name="com.onlines.onlineSaleTest.AutoCheckHtml"></class>
+			<!--<class name="onlineSaleTest.AutoCheckUrls"></class>-->
+		</classes>
+	</test>
+	<listeners>
+<!--		<listener class-name="com.onlines.onlineSaleTest.TestReport"></listener>-->
+<!--		<listener class-name="com.onlines.onlineSaleTest.util.TestListener"></listener>-->
+	</listeners>
+</suite>
