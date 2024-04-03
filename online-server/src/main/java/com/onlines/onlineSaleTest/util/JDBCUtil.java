@@ -18,9 +18,9 @@ public class JDBCUtil {
     // 创建用于连接数据库的Connection对象
 
     public void getConnection() {
-        String jdbc_url = "jdbc:mysql://jzbjdeal.dbt.djdns.cn:3306/test2";
-        String username = "qa_user";
-        String password = "u9sU4Fo3tSfDHacx";
+        String jdbc_url = //数据库连接;
+        String username = //数据库账号
+        String password = //数据库密码
 
         try {
             Class.forName("com.mysql.jdbc.Driver");// 加载Mysql数据驱动
