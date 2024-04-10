@@ -1,4 +1,26 @@
 spring:
-  config:
-    activate:
-      on-profile: @profileActive@
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/online_inspection_tracker?useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
+  main:
+    allow-circular-references: true
+
+server:
+  port: 9091
+
+#mybatis:
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  configLocation: classpath:mybatis.xml
+  type-aliases-package: com.onlines
+
+#project:
+#  env: test
+
+logging:
+  level:
+    org:
+      mybatis=DEBUG:

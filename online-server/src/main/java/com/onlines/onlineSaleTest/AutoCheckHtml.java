@@ -46,7 +46,6 @@ import static io.qameta.allure.Allure.attachment;
 public class AutoCheckHtml {//extends AbstractTestNGSpringContextTests {
     ImageComp imageComp = new ImageComp();
     DingUtil dingUtil = new DingUtil();
-    String yuming = "http://test-djimage.oss-cn-beijing-internal.aliyuncs.com";
 
 
     private static OnlinesPatrolMapper onlinesPatrolMapper=SpringWrapper.getBean(OnlinesPatrolMapper.class);
