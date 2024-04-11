@@ -16,13 +16,13 @@ public class TriggerUrlJob implements InitializingBean {
     private OnlinesSaleController onlinesSaleController;
 
     public void triggerUrlTask() {
-//        try {
-//            System.out.println("开始执行 " + new Date());
-//            onlinesSaleController.invokerTestng();
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//            System.out.println("invokerTestng接口异常" + ex);
-//        }
+        try {
+            System.out.println("开始执行 " + new Date());
+            onlinesSaleController.invokerTestng();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("invokerTestng接口异常" + ex);
+        }
 
     }
 

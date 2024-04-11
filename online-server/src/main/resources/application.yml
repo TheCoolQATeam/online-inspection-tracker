@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/online_inspection_tracker?useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&zeroDateTimeBehavior=convertToNull
-    username: root
-    password: 123456
+    url: jdbc:mysql://jzbjdeal.dbt.djdns.cn:3306/test2?useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&zeroDateTimeBehavior=convertToNull
+    username: qa_user
+    password: u9sU4Fo3tSfDHacx
   main:
     allow-circular-references: true
 
@@ -15,7 +15,7 @@ server:
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   configLocation: classpath:mybatis.xml
-  type-aliases-package: com.onlines
+#  type-aliases-package: com.onlines.mapper
 
 #project:
 #  env: test
