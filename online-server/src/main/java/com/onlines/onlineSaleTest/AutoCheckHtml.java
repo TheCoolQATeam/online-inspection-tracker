@@ -11,11 +11,8 @@ import com.onlines.onlineSaleTest.util.MyRetry;
 import com.onlines.pojo.OnlinesPatrol;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Description;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -42,7 +39,7 @@ import static io.qameta.allure.Allure.attachment;
  */
 //@Listeners({TestReport.class})
 //@ContextConfiguration(locations = "classpath:mybatis.xml")
-@SpringBootTest(classes = AutoCheckHtml.class)
+@SpringBootTest(classes = com.onlines.onlineSaleTest.AutoCheckHtml.class)
 public class AutoCheckHtml {//extends AbstractTestNGSpringContextTests {
     ImageComp imageComp = new ImageComp();
     DingUtil dingUtil = new DingUtil();
@@ -72,7 +69,6 @@ public class AutoCheckHtml {//extends AbstractTestNGSpringContextTests {
     public void testHtmlServiceability(int id, String htmlinfo, String title, String url) throws FileNotFoundException {
         page.navigate(url);
         long currentTimeMillis = System.currentTimeMillis();
-
         // 获取当前工作目录
         String userDir = System.getProperty("user.dir");
         String imageName = htmlinfo.concat("_").concat(Long.toString(currentTimeMillis));
@@ -95,7 +91,7 @@ public class AutoCheckHtml {//extends AbstractTestNGSpringContextTests {
                 String pic1 = imagePath;  // 本次图片
                 // 基准值图片
                 String pic2 = userDir.concat(File.separator).concat("online-images").concat(File.separator).concat(onlinesPatrol.getDatumAddress()).concat(".png");//线上运行获取图片地址
-                System.out.println("pic2------------" + pic2);
+                System.out.println("pic2地址------------" + pic2);
                 String result = null;
                 try {
                     result = imageComp.compareImage(pic2, pic1);
@@ -211,7 +207,7 @@ public class AutoCheckHtml {//extends AbstractTestNGSpringContextTests {
     @DataProvider
     public Object[][] HtmlDataTest() {
         return new Object[][]{
-
+                {1, "百度一下页面", "百度一下", "https://www.baidu.com/"},
         };
     }
 
