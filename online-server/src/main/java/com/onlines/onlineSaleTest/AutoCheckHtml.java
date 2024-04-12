@@ -37,8 +37,6 @@ import static io.qameta.allure.Allure.attachment;
  * zhangdexi
  * 监控：主要页面白页、无法打开等异常
  */
-//@Listeners({TestReport.class})
-//@ContextConfiguration(locations = "classpath:mybatis.xml")
 @SpringBootTest(classes = com.onlines.onlineSaleTest.AutoCheckHtml.class)
 public class AutoCheckHtml {//extends AbstractTestNGSpringContextTests {
     ImageComp imageComp = new ImageComp();
@@ -143,13 +141,6 @@ public class AutoCheckHtml {//extends AbstractTestNGSpringContextTests {
             }
         }
     }
-//    @AfterMethod
-//    public void getRunTime(ITestListener tr) {
-//        //  TestListener ll;
-//        //tr.onTestSuccess();
-//
-//
-//    }
 
 
 

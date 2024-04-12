@@ -10,44 +10,30 @@ import com.onlines.enums.ErrCodelEnum;
 import com.onlines.mapper.OnlinesPatrolMapper;
 import com.onlines.pojo.H5Stat;
 import com.onlines.pojo.OnlinesPatrol;
-import com.onlines.service.ExcelUpload;
 import com.onlines.service.IOnlinesPatrolService;
 import com.onlines.utils.DateUtil;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
 import org.testng.collections.Lists;
-import org.testng.xml.SuiteXmlParser;
-import org.testng.xml.XmlSuite;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
-import org.springframework.core.io.ClassPathResource;
+
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 
 @CrossOrigin
 @RestController
@@ -60,10 +46,6 @@ public class OnlinesSaleController {
     @GetMapping("/selectInfo")
     public ResponseDto OnlinePatrolSelect(OnlineSaleDto onlineSaleDto) {
         System.out.println("入參：" + JSON.toJSONString(onlineSaleDto));
-//        onlineSaleDto.setPageSize(10);
-//        onlineSaleDto.setPageNum(1);
-//        onlineSaleDto.setGroup(1);
-//        List<OnlinesPatrol> pageInfo = onlinesPatrolService.selectAll(onlineSaleDto);
         PageInfo pageInfo = onlinesPatrolService.selectAll(onlineSaleDto);
         return new ResponseDto(ErrCodelEnum.success.getCode(), pageInfo);
     }
@@ -72,10 +54,6 @@ public class OnlinesSaleController {
     @ResponseBody
     public ResponseDto OnlinePatrolAdd(@RequestBody OnlinesPatrol onlinesPatrol) {
         System.out.println("入參：" + JSON.toJSONString(onlinesPatrol));
-//        onlinesPatrol.setUrl("url11111");
-//        onlinesPatrol.setTitle("title");
-//        onlinesPatrol.setHtmlinfo("htmlinfo");
-//        onlinesPatrol.setGroup("ceshi");
         if (onlinesPatrol.getUrl() == null || onlinesPatrol.getTitle() == null || onlinesPatrol.getHtmlinfo() == null || onlinesPatrol.getGroupId() == null) {
             return new ResponseDto(ErrCodelEnum.fail.getCode());
         }
@@ -83,7 +61,6 @@ public class OnlinesSaleController {
         return new ResponseDto(ErrCodelEnum.success.getCode());
     }
 
-    //    @GetMapping("")
     @PostMapping("/updataCaseInfo")
     @ResponseBody
     public ResponseDto UpdataCaseInfo(@RequestBody OnlinesPatrol onlinesPatrol) {
@@ -174,111 +151,15 @@ public class OnlinesSaleController {
         return new ResponseDto(ErrCodelEnum.success.getCode(), stat);
     }
 
-
-    @PostMapping(value = "/uploadExcl")
-    //@GetMapping("/uploadExcl")
-    @ResponseBody
-    public Map<String, Object> uploadExcl(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
-        Map<String, Object> result = new HashMap<>();
-        String path = request.getSession().getServletContext().getRealPath("/");
-
-        List<OnlinesPatrol> onlinesPatrols = new ArrayList<>();
-        try {
-            // 如果文件不为空，写入上传路径
-            if (!file.isEmpty()) {
-                String fileName = file.getOriginalFilename();
-                InputStream str = file.getInputStream();
-                onlinesPatrols = new ExcelUpload().uploadExcel(fileName, str);
-            } else {
-                String filePath = "D:\\songgaimin\\用例集.xlsx";
-                File fileDes = new File(filePath);
-                InputStream str = new FileInputStream(fileDes);
-                String fileName = fileDes.getName();
-                onlinesPatrols = new ExcelUpload().uploadExcel(fileName, str);
-            }
-            if (!CollectionUtils.isEmpty(onlinesPatrols)) {
-                for (OnlinesPatrol onlinesPatrol : onlinesPatrols) {
-                    onlinesPatrolMapper.insert(onlinesPatrol);
-                }
-            }
-
-//            } else {
-//                result.put("code", "1");
-//                result.put("message", "上传文件为空！");
-//            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (result.get("code").equals("0")) {
-            //根据时间戳创建新的文件名，这样即便是第二次上传相同名称的文件，也不会把第一次的文件覆盖了
-            //也可以用UUID创建
-            String fileName = "";//System.currentTimeMillis() + file.getOriginalFilename();
-            //通过req.getServletContext().getRealPath("") 获取当前项目的真实路径，然后拼接前面的文件名
-            String destFileName = request.getContextPath() + "uploaded" + File.separator + fileName;
-            System.out.println(request.getServletPath());
-            System.out.println(request.getServletContext());
-            System.out.println(request.getServletContext().getRealPath(""));
-            System.out.println(request.getServletContext().getRealPath("/"));
-            System.out.println(request.getContextPath());
-            System.out.println(destFileName);
-            //第一次运行的时候，这个文件所在的目录往往是不存在的，这里需要创建一下目录
-            File destFile = new File(destFileName);
-            destFile.getParentFile().mkdirs();
-            System.out.println(destFile);
-            //把浏览器上传的文件复制到希望的位置
-//            try {
-//               // file.transferTo(destFile);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-            System.out.println(fileName);
-        }
-        return result;
-    }
-
-    @GetMapping("/invokeTestNg11")
-    public ResponseDto invokeTestNg11() throws ParseException {
-        String xmlName = "testng.xml";
-        //根据传递过来的xmlName，找到目录下的对应的xml
-        InputStream inputStream = OnlinesSaleController.class.getClassLoader().getResourceAsStream(xmlName);
-        TestNG testNG = new TestNG();
-        SuiteXmlParser suiteXmlParser = new SuiteXmlParser();
-        List<XmlSuite> suites = new ArrayList<>();
-        XmlSuite xmlSuite = suiteXmlParser.parse(xmlName, inputStream, true);
-        suites.add(xmlSuite);
-        //定义一个map键值对
-        Map<String,String> parameters = new HashMap<>();
-        //此时参数的格式是name:1,2,3,4,5,6
-        //要看一下这个xml到底是怎么运行的？去xml文件中xmlAndParamter.xml
-        String param="name:1,2";
-        parameters.put("list", param);//本身这个xml中就有name这个参数，那么这么做就会替换掉原来的name
-        xmlSuite.setParameters(parameters);
-        testNG.setXmlSuites(suites);
-        //添加一个小的监听器
-        TestListenerAdapter listener = new TestListenerAdapter();
-        testNG.addListener(listener);
-
-        List list=new ArrayList();
-        //list.add();
-        testNG.setListenerClasses(list);
-        testNG.run();
-
-        //收集通过的用例和失败的用例
-        List<ITestResult> pass = listener.getPassedTests();
-        //log.info("本次通过的用例数是："+pass.size());
-        List<ITestResult> failed = listener.getFailedTests();
-        System.out.println("本次失败的用例数是："+failed.size());
-
-        //return testNG.getStatus();
-        return new ResponseDto(ErrCodelEnum.success.getCode(), null);
-    }
     @GetMapping("/invokerTestng")
     public ResponseDto invokerTestng() throws ParseException {
         System.out.println("invokerTestng");
         TestListenerAdapter tla = new TestListenerAdapter();
         TestNG testng = new TestNG();
         List<String> suite = Lists.newArrayList();
-        suite.add("E:/wumj/project/qa/online-inspection-tracker/online-server/src/main/resources/testng.xml");//path to xml..
+
+        suite.add("D:\\gitcode\\11\\online-inspection-tracker\\online-server\\src\\main\\resources\\testng.xml");
+        //suite.add("D:/gitcode/11/online-inspection-tracker/online-server/src/main/resources/testng.xml");//path to xml..
         testng.setTestSuites(suite);
         testng.run();
         return new ResponseDto(ErrCodelEnum.success.getCode(), null);

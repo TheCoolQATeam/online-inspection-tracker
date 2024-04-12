@@ -90,33 +90,6 @@ public class ImageComp {
             i++;
         }
 
-//        list1 = getPX(images[1]);
-//        list2 = getPX(images[0]);
-//        i = 0;
-//        j = 0;
-//        for (String[] strings : list1) {
-//            if ((i + 1) == list1.length) {
-//                continue;
-//            }
-//            for (int m = 0; m < strings.length; m++) {
-//                try {
-//                    String[] value1 = list1[i][j].toString().split(",");
-//                    String[] value2 = list2[i][j].toString().split(",");
-//                    int k = 0;
-//                    for (int n = 0; n < value2.length; n++) {
-//                        if (Math.abs(Integer.parseInt(value1[n]) - Integer.parseInt(value2[n])) < 5) {
-//                            xiangsi++;
-//                        } else {
-//                            busi++;
-//                        }
-//                    }
-//                } catch (RuntimeException e) {
-//                    continue;
-//                }
-//                j++;
-//            }
-//            i++;
-//        }
         String baifen = "";
         try {
             //获取相似度/(相似度+不相似) 的占比
