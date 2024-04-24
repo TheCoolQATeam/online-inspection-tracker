@@ -3,7 +3,7 @@ import { message } from 'ant-design-vue'
 
 const baseURL = process.env.VUE_APP_HOST || ''
 export const loginURL = process.env.VUE_APP_INPASS_LOGIN || ''
-console.log('loginURL', loginURL, baseURL,process.env.VUE_APP_MODE)
+console.log('loginURL', loginURL, baseURL, process.env.VUE_APP_MODE)
 
 
 const service = axios.create({
@@ -37,7 +37,6 @@ service.interceptors.response.use(
     if (response) {
       if (response.status === 401) {
         // window.location.href = loginURL + encodeURIComponent(location.href)
-        // window.location.href = getInpassLoginUrl()
       }
       message.error(response.message || '请求错误~')
       return Promise.reject(response)

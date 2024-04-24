@@ -3,26 +3,15 @@
     <div class="logo" >
     线上巡检系统
   </div>
-    <!-- <a class="github"><GithubOutlined /></a> -->
   </a-layout-header>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-// import { GithubOutlined } from '@ant-design/icons-vue'
-import { clearCookie } from '@/common/util'
-import { loginURL } from '@/api/service'
 
 export default defineComponent({
-  components: {
-    // GithubOutlined
-  },
   setup () {
     const userName = '联系我们'
-    const toLoginOut = () => {
-      clearCookie()
-      window.location.href = loginURL + location.href
-    }
     return {
       userName,
     }

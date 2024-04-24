@@ -1,10 +1,9 @@
-package com.onlines.onlineSaleTest.util;
+package com.onlines.utils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URL;
 
 public class ImageComp {
     // 改变成二进制码

@@ -1,4 +1,4 @@
-package com.onlines.onlineSaleTest.util;
+package com.onlines.utils;
 
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;

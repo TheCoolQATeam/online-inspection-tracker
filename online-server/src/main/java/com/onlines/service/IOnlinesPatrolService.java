@@ -14,7 +14,6 @@ public interface IOnlinesPatrolService {
     void insertInfoTest(OnlinesPatrol onlinesPatrol);
 
     PageInfo selectAll(OnlineSaleDto onlineSaleDto);
-    //PageInfo updataCase(OnlineSaleDto onlineSaleDto);
     int updataCase(OnlinesPatrol onlinesPatrol);
     int deleteById(int id);
     int resetDatum(int id);

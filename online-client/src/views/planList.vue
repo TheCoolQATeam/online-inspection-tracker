@@ -4,9 +4,6 @@
       <a-table :dataSource="dataSource" :columns="columns" :pagination="pagination"  class="case-list" :loading="loading"
         @change="handleTableChange">
         <template v-slot:bodyCell="{record, column}">
-            <template v-if="column.dataIndex === 'url'">
-                <a-button type="link" :href="record.url" target="__blank">去查看</a-button>
-            </template>
             <template v-if="column.dataIndex === 'passedNumRate'">
                 <span :style="{ color: record.passedNum===record.totalNum? 'green': 'red' }">
                   {{ (record.passedNum / record.totalNum).toFixed(2) * 100 + '%' }}
@@ -46,10 +43,6 @@ const columns = [
     title: '用例成功率',
     dataIndex: 'passedNumRate',
     key: 'passedNumRate'
-    // customRender: ({ record }: any) => {
-    //   const rate: any = record.passedNum / record.totalNum
-    //   return rate.toFixed(2) * 100 + '%'
-    // }
   },
   {
     title: '用例忽略数',
@@ -68,11 +61,6 @@ const columns = [
     key: 'duration',
     ellipsis: true,
     customRender: ({ record }: any) => msToMinutes(record.duration)
-  },
-  {
-    title: '完整报告',
-    dataIndex: 'url',
-    key: 'url'
   }
 ]
 

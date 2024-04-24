@@ -2,24 +2,22 @@ package com.onlines.onlineSaleTest;
 
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.Geolocation;
-import com.microsoft.playwright.options.LoadState;
+import com.onlines.listeners.MyReporter;
 import com.onlines.mapper.OnlinesPatrolMapper;
-import com.onlines.onlineSaleTest.util.DingUtil;
-import com.onlines.onlineSaleTest.util.ImageComp;
-import com.onlines.onlineSaleTest.util.JDBCUtil;
-import com.onlines.onlineSaleTest.util.MyRetry;
+import com.onlines.utils.DingUtil;
+import com.onlines.utils.ImageComp;
+import com.onlines.utils.JDBCUtil;
+import com.onlines.utils.MyRetry;
 import com.onlines.pojo.OnlinesPatrol;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Description;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,22 +32,22 @@ import static io.qameta.allure.Allure.attachment;
 
 
 /**
- * zhangdexi
- * 监控：主要页面白页、无法打开等异常
+ * 自动化巡检核心方法
  */
+@Listeners({ MyReporter.class })
 @SpringBootTest(classes = com.onlines.onlineSaleTest.AutoCheckHtml.class)
-public class AutoCheckHtml {//extends AbstractTestNGSpringContextTests {
+public class AutoCheckHtml {
     ImageComp imageComp = new ImageComp();
     DingUtil dingUtil = new DingUtil();
 
 
-    private static OnlinesPatrolMapper onlinesPatrolMapper=SpringWrapper.getBean(OnlinesPatrolMapper.class);
+    private static OnlinesPatrolMapper onlinesPatrolMapper = SpringWrapper.getBean(OnlinesPatrolMapper.class);
 
     private Playwright playwright = Playwright.create();
 
     Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
     BrowserContext context = browser.newContext(new Browser.NewContextOptions()
-            .setUserAgent("dj_jyptqa_monitor Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3765.0 Mobile Safari/537.36")
+            .setUserAgent("online_inspection_tracker Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3765.0 Mobile Safari/537.36")
 //            .setViewportSize(360, 640)
             .setViewportSize(411, 731)
 //            .setDeviceScaleFactor(2.625)

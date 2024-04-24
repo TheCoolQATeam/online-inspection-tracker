@@ -1,16 +1,9 @@
-package com.onlines.pojo;
+package com.onlines.entiry;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
-
-import java.sql.Date;
-import java.sql.Timestamp;
-
-public class TestPlanInfo {
+public class TestPlanDto {
     private Integer id;
     private Long duration;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Timestamp beginTime;
+    private Long timestamp;
     private Integer passedNum;
     private Integer failedNum;
     private Integer skippedNum;
@@ -23,17 +16,18 @@ public class TestPlanInfo {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public Long getDuration() {
         return duration;
     }
     public void setDuration(Long duration) {
         this.duration = duration;
     }
-    public Timestamp getBeginTime() {
-        return beginTime;
+    public Long getTimestamp() {
+        return timestamp;
     }
-    public void setTimestamp(Timestamp beginTime) {
-        this.beginTime = beginTime;
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public Integer getFailedNum() {
@@ -73,7 +67,7 @@ public class TestPlanInfo {
         return "testPlanResult{" +
                 "id=" + id +
                 ", duration=" + duration +
-                ", beginTime=" + beginTime +
+                ", timestamp=" + timestamp +
                 ", passedNum=" + passedNum +
                 ", failedNum=" + failedNum +
                 ", skippedNum=" + skippedNum +

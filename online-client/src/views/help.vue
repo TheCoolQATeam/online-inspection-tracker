@@ -2,7 +2,7 @@
     <div class="wrapper">
       <div>
         <h1>一、H5页面接入巡检平台</h1>
-        <!-- <p class="content" style="color: red;">注意：支持需要登录的H5页面</p> -->
+        <!-- <p class="content" style="color: red;">注意：开源版本暂不支持登录的H5页面，若需支持，请二次开发或群组咨询</p> -->
         <div class="content flex">
           <img src="../assets/images/insert.png" style="width: 500px;"/>
           <ul>

@@ -1,11 +1,8 @@
 package com.onlines.enums;
 
 public enum GroupEnum {
-    JIAOYIPINGTAI(1,"交易平台"),
-    TONGYONG(2,"通用"),
-    ZHONGTAI(3,"中台"),
-    BAOMU(4,"保姆"),
-    YUESAO(5,"月嫂");
+    GROUPA(1,"分组A"),
+    GROUPB(2,"分组B");
 
     private int code;
     private String desc;

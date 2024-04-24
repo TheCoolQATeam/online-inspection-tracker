@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class OnlinesPatrolServiceImpl implements IOnlinesPatrolService {
@@ -94,8 +93,6 @@ public class OnlinesPatrolServiceImpl implements IOnlinesPatrolService {
     }
 
     public PageInfo getTestPlanList(Date beginDate, Date endDate, DataReqDto params) {
-//        System.out.println("开始日期" + beginDate.toString());
-//        System.out.println("结束日期" + endDate.toString());
         PageInfo pageInfo = null;
         PageHelper.startPage(params.getPageNum(), params.getPageSize());
         Page<TestPlanInfo> res = onlinesPatrolMapper.getTestPlanList(beginDate, endDate);

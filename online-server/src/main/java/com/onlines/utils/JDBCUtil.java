@@ -1,4 +1,4 @@
-package com.onlines.onlineSaleTest.util;
+package com.onlines.utils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 
@@ -18,7 +18,7 @@ public class JDBCUtil {
     // 创建用于连接数据库的Connection对象
 
     public void getConnection() {
-        String jdbc_url = "jdbc:mysql://localhost:3306/online_inspection_tracker?";//数据库连接;
+        String jdbc_url = "jdbc:mysql://localhost:3306/online_inspection_tracker";//数据库连接;
         String username = "root";//数据库账号
         String password = "123456";//数据库密码
 

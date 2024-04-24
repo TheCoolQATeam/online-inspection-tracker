@@ -1,4 +1,4 @@
-package com.onlines.onlineSaleTest.util;
+package com.onlines.utils;
 
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;

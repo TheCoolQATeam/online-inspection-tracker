@@ -1,10 +1,5 @@
 package com.onlines.entiry;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.time.LocalDateTime;
-import java.util.Date;
-
 public class DataReqDto {
     private Integer beginDate;
     private Integer  endDate;

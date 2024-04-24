@@ -11,7 +11,6 @@
     <result column="datum_address" jdbcType="VARCHAR" property="datumAddress" />
     <result column="datum_createtime" jdbcType="TIMESTAMP" property="datumCreatetime" />
     <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="uid" jdbcType="VARCHAR" property="uid" />
     <result column="need_login" jdbcType="INTEGER" property="needLogin" />
   </resultMap>
   <resultMap id="CaseInfoMap" type="com.onlines.pojo.CaseInfo">
@@ -25,7 +24,6 @@
   </resultMap>
   <resultMap id="testPlanMap" type="com.onlines.pojo.TestPlanInfo">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="jenkins_id" jdbcType="VARCHAR" property="jenkinsId" />
     <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="duration" jdbcType="VARCHAR" property="duration" />
     <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
@@ -93,8 +91,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, url, title, htmlinfo, `groupId`, createTime, datum_address, datum_createtime, username, need_login,
-    `uid`
+    id, url, title, htmlinfo, `groupId`, createTime, datum_address, datum_createtime, username, need_login
   </sql>
   <sql id="Case_Column_List">
     id, create_time, response_time, case_id, states, failed_reason
@@ -132,12 +129,11 @@
   <insert id="insert" parameterType="com.onlines.pojo.OnlinesPatrol">
     insert into onlinespatrol (id, url, title,
     htmlinfo, `groupId`, createTime,
-    datum_address, datum_createtime, username, need_login,
-    `uid`)
+    datum_address, datum_createtime, username, need_login)
     values (#{id,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
     #{htmlinfo,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP},
     #{datumAddress,jdbcType=VARCHAR}, #{datumCreatetime,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR},
-    #{needLogin,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR})
+    #{needLogin,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.onlines.pojo.OnlinesPatrol">
     insert into onlinespatrol
@@ -168,9 +164,6 @@
       </if>
       <if test="username != null">
         username,
-      </if>
-      <if test="uid != null">
-        `uid`,
       </if>
       <if test="needLogin != null">
         `need_login`,
@@ -203,9 +196,6 @@
       </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="uid != null">
-        #{uid,jdbcType=VARCHAR},
       </if>
       <if test="needLogin != null">
         #{needLogin,jdbcType=INTEGER},
@@ -248,9 +238,6 @@
       <if test="record.username != null">
         username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.uid != null">
-        `uid` = #{record.uid,jdbcType=VARCHAR},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -266,8 +253,7 @@
     createTime = #{record.createtime,jdbcType=TIMESTAMP},
     datum_address = #{record.datumAddress,jdbcType=VARCHAR},
     datum_createtime = #{record.datumCreatetime,jdbcType=TIMESTAMP},
-    username = #{record.username,jdbcType=VARCHAR},
-    `uid` = #{record.uid,jdbcType=VARCHAR}
+    username = #{record.username,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -299,9 +285,6 @@
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="uid != null">
-        `uid` = #{uid,jdbcType=VARCHAR},
-      </if>
       <if test="needLogin != null">
         `need_login` = #{needLogin,jdbcType=INTEGER},
       </if>
@@ -318,7 +301,6 @@
     datum_address = #{datumAddress,jdbcType=VARCHAR},
     datum_createtime = #{datumCreatetime,jdbcType=TIMESTAMP},
     username = #{username,jdbcType=VARCHAR},
-    `uid` = #{uid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
