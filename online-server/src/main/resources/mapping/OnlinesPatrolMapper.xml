@@ -12,6 +12,9 @@
     <result column="datum_createtime" jdbcType="TIMESTAMP" property="datumCreatetime" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="need_login" jdbcType="INTEGER" property="needLogin" />
+    <result column="ding_key" jdbcType="VARCHAR" property="dingKey" />
+    <result column="wechat_key" jdbcType="VARCHAR" property="wechatKey" />
+    <result column="feishu_key" jdbcType="VARCHAR" property="feishuKey" />
   </resultMap>
   <resultMap id="CaseInfoMap" type="com.onlines.pojo.CaseInfo">
     <id column="id" jdbcType="INTEGER" property="id" />
@@ -91,7 +94,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, url, title, htmlinfo, `groupId`, createTime, datum_address, datum_createtime, username, need_login
+    id, url, title, htmlinfo, `groupId`, createTime, datum_address, datum_createtime, username, ding_key, feishu_key, `wechat_key`, need_login
   </sql>
   <sql id="Case_Column_List">
     id, create_time, response_time, case_id, states, failed_reason
@@ -129,10 +132,10 @@
   <insert id="insert" parameterType="com.onlines.pojo.OnlinesPatrol">
     insert into onlinespatrol (id, url, title,
     htmlinfo, `groupId`, createTime,
-    datum_address, datum_createtime, username, need_login)
+    datum_address, datum_createtime, username, ding_key, feishu_key, `wechat_key`, need_login)
     values (#{id,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
     #{htmlinfo,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP},
-    #{datumAddress,jdbcType=VARCHAR}, #{datumCreatetime,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR},
+    #{datumAddress,jdbcType=VARCHAR}, #{datumCreatetime,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR},#{dingKey,jdbcType=VARCHAR},#{feishuKey,jdbcType=VARCHAR},#{wechatKey,jdbcType=VARCHAR},
     #{needLogin,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.onlines.pojo.OnlinesPatrol">
@@ -164,6 +167,15 @@
       </if>
       <if test="username != null">
         username,
+      </if>
+      <if test="ding_key != null">
+        ding_key,
+      </if>
+      <if test="feishu_key != null">
+        feishu_key,
+      </if>
+      <if test="wechat_key != null">
+        wechat_key,
       </if>
       <if test="needLogin != null">
         `need_login`,
@@ -238,6 +250,15 @@
       <if test="record.username != null">
         username = #{record.username,jdbcType=VARCHAR},
       </if>
+      <if test="record.ding_key != null">
+        ding_key = #{record.ding_key,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feishu_key != null">
+        feishu_key = #{record.feishu_key,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wechat_key != null">
+        wechat_key = #{record.wechat_key,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -254,6 +275,9 @@
     datum_address = #{record.datumAddress,jdbcType=VARCHAR},
     datum_createtime = #{record.datumCreatetime,jdbcType=TIMESTAMP},
     username = #{record.username,jdbcType=VARCHAR}
+    ding_key = #{record.ding_key,jdbcType=VARCHAR}
+    feishu_key = #{record.feishu_key,jdbcType=VARCHAR}
+    wechat_key = #{record.wechat_key,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -285,6 +309,15 @@
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
       </if>
+      <if test="dingKey != null">
+        ding_key = #{dingKey,jdbcType=VARCHAR},
+      </if>
+      <if test="feishuKey != null">
+        feishu_key = #{feishuKey,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatKey != null">
+        wechat_key = #{wechatKey,jdbcType=VARCHAR},
+      </if>
       <if test="needLogin != null">
         `need_login` = #{needLogin,jdbcType=INTEGER},
       </if>
@@ -301,18 +334,11 @@
     datum_address = #{datumAddress,jdbcType=VARCHAR},
     datum_createtime = #{datumCreatetime,jdbcType=TIMESTAMP},
     username = #{username,jdbcType=VARCHAR},
+    ding_key = #{dingKey,jdbcType=VARCHAR},
+    feishu_key = #{feishuKey,jdbcType=VARCHAR},
+    wechat_key = #{wechatKey,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
-
-<!--  <select id="selectByTitle" parameterType="java.lang.String" resultMap="BaseResultMap">-->
-<!--    select-->
-<!--    <include refid="Base_Column_List" />-->
-<!--    from onlinespatrol-->
-<!--    where title = #{title,jdbcType=VARCHAR}-->
-<!--  </select>-->
-
-
 
   <select id="selectByDatumAddress" parameterType="java.lang.String" resultMap="BaseResultMap">
     select

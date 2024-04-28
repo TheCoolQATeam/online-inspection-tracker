@@ -8,6 +8,6 @@
 	</test>
 	<listeners>
 <!--		<listener class-name="com.onlines.onlineSaleTest.TestReport"></listener>-->
-<!--		<listener class-name="com.onlines.onlineSaleTest.util.TestListener"></listener>-->
+		<listener class-name="com.onlines.listeners.TestListener"></listener>
 	</listeners>
 </suite>

@@ -1,14 +1,10 @@
 import axios from 'axios'
 import { message } from 'ant-design-vue'
 
-const baseURL = process.env.VUE_APP_HOST || ''
-export const loginURL = process.env.VUE_APP_INPASS_LOGIN || ''
-console.log('loginURL', loginURL, baseURL, process.env.VUE_APP_MODE)
-
-
+export const baseURL = "http://127.0.0.1:9091";
 const service = axios.create({
   withCredentials: true,
-  baseURL: baseURL,
+  baseURL,
   timeout: 15000
 })
 
@@ -23,8 +19,7 @@ service.interceptors.response.use(
   (response: any) => {
     if (response.data.code == 0) {
       return Promise.resolve(response.data.data || true)
-    } else if (response.data.code == "-1") {  // 登录拦截
-      // window.location.href = loginURL + location.href
+    } else if (response.data.code == "-1") {
       message.error(response?.data?.codeMsg || '请求错误~')
       return Promise.resolve(response.data || true)
     } else {
@@ -35,9 +30,6 @@ service.interceptors.response.use(
   (err) => {
     const { response } = err
     if (response) {
-      if (response.status === 401) {
-        // window.location.href = loginURL + encodeURIComponent(location.href)
-      }
       message.error(response.message || '请求错误~')
       return Promise.reject(response)
     }

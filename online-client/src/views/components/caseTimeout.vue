@@ -10,7 +10,7 @@
                 <a-tag color="yellow">{{ record.responseTime }}</a-tag>
             </template>
             <template v-if="column.dataIndex === 'caseId'">
-              <a-button type="link" :href="'/#/h5-monitor/case/'+ record.caseId"  target="__blank">{{ record.caseId }}</a-button>
+              <a-button type="link" :href="'/case/info/'+ record.caseId"  target="__blank">{{ record.caseId }}</a-button>
             </template>
         </template>
         </a-table>

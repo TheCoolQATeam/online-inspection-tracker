@@ -4,13 +4,14 @@
         <h1>一、H5页面接入巡检平台</h1>
         <!-- <p class="content" style="color: red;">注意：开源版本暂不支持登录的H5页面，若需支持，请二次开发或群组咨询</p> -->
         <div class="content flex">
-          <img src="../assets/images/insert.png" style="width: 500px;"/>
+          <img src="../assets/images/add.png" style="width: 600px;"/>
           <ul>
             <li>页面标题：<span style="color: red;">这里的标题必须和H5页面标题保持一致</span></li>
             <li>巡检URL地址：H5链接</li>
-            <li>告警人：xiaoming,xiaohong <span style="color: red;"></span></li>
-            <li>说明：备注信息</li>
-            <li>业务线</li>
+            <li>业务线：可将用例进行分组管理</li>
+            <li>钉钉告警机器人access_token：https://oapi.dingtalk.com/robot/send?access_token=xx，只需要填写 xx 值。不填写，则不发告警</li>
+            <li>企微告警机器人Key：https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xx，只需要填写 xx值。不填写，则不发告警</li>
+            <li>飞书告警机器人Key：https://open.feishu.cn/open-apis/bot/v2/hook/xx，只需要填写 xx 值。不填写，则不发告警</li>
           </ul>
         </div>
       </div>
@@ -18,24 +19,26 @@
         <h1>二、接收告警信息</h1>
         <h2>1、页面加载异常</h2>
         <p class="content">
-          <img src="../assets/images/qiweigaojing.png"  style="width: 500px;"/>
+          <img src="../assets/images/gj-load.png"  style="width: 500px;"/>
         </p>
         <h2>2、页面截屏图片像素对比异常</h2>
         <p class="content">
-          <img src="../assets/images/gaojing2.png"  style="width: 500px;"/>
+          <img src="../assets/images/gj-xs.png"  style="width: 500px;"/>
+        </p>
+      </div>
+      <div>
+        <h1>三、查看相关数据</h1>
+        <h2>1、每日巡检记录</h2>
+        <p class="content">
+          <img src="../assets/images/log.png"  style="width: 800px;"/>
+        </p>
+        <h2>2、数据看板</h2>
+        <p class="content">
+          <img src="../assets/images/stat.png"  style="width: 800px;"/>
         </p>
       </div>
     </div>
 </template>
-<script lang="ts">
-import { defineComponent, computed, toRefs } from 'vue'
-export default defineComponent({
-  name: 'h5MonitorData',
-  setup (props, { emit }) {
-    // dui de
-  }
-})
-</script>
 <style scoped lang="less">
 .wrapper {
   background-color: white;
@@ -58,7 +61,7 @@ export default defineComponent({
       ul {
         padding-left: 50px;
         li {
-          line-height: 40px;
+          line-height: 32px;
         }
       }
     }

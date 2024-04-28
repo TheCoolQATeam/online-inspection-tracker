@@ -5,7 +5,7 @@ import cn.hutool.http.HttpResponse;
 import com.alibaba.fastjson.JSONObject;
 import org.testng.ITestResult;
 
-public class DingUtil {
+public class WechatUtil {
     public static String setMsgContent(ITestResult result){
         String caseDescription = result.getMethod().getDescription();
         Object[] caseParameters = result.getParameters();
@@ -27,19 +27,18 @@ public class DingUtil {
     public static String sendMsg(ITestResult result){
         String access_token = getToken(result);
         if(access_token!=null) {
-            String url = "https://oapi.dingtalk.com/robot/send?" + access_token;
             String msgContent = setMsgContent(result);
-
+            String url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?" + access_token;
             JSONObject content = new JSONObject();
             content.put("content", msgContent);
+
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("msgtype", "text");
-            jsonObject.put("text", content.toJSONString());
+            jsonObject.put("text", content);
+            System.out.println("入参：" + jsonObject.toJSONString());
 
-            HttpResponse DingResponse = HttpRequest.post(url).header("Content-Type", "application/json").body(jsonObject.toJSONString()).execute();
-            System.out.println("钉钉发送结果：");
-            System.out.println(DingResponse.body());
-            return DingResponse.body();
+            HttpResponse res = HttpRequest.post(url).header("Content-Type", "application/json").body(jsonObject.toJSONString()).execute();
+            return res.body();
         }
         return null;
     }
@@ -53,19 +52,20 @@ public class DingUtil {
         return msgContent;
     }
 
-    public static String sendMsgPic(String testUrl, int id, String datum, String title, String dingKey){
-        if(dingKey==null) {
+    public static String sendMsgPic(String testUrl, int id, String datum, String title, String wechatKey){
+        if(wechatKey==null) {
             return null;
         }
-        String access_token = "access_token=" + dingKey;
+        String access_token = "key=" + wechatKey;
         String msgContent = setMsgContentPic(testUrl,id,datum,title);
-        String url = "https://oapi.dingtalk.com/robot/send?" + access_token;
-        JSONObject content = new com.alibaba.fastjson.JSONObject();
+        String url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?" + access_token;
+        JSONObject content = new JSONObject();
         content.put("content", msgContent);
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("msgtype", "text");
-        jsonObject.put("text", content.toJSONString());
+        jsonObject.put("text", content);
+        System.out.println("入参：" + jsonObject.toJSONString());
 
         HttpResponse DingResponse = HttpRequest.post(url).header("Content-Type", "application/json").body(jsonObject.toJSONString()).execute();
         System.out.println(DingResponse.body());
@@ -77,8 +77,8 @@ public class DingUtil {
         Object[] caseParameters = result.getParameters();
 
         if (caseParameters.length != 0) {
-            if (result.getParameters()[4] != null) {
-                access_token = "access_token=" + result.getParameters()[4];
+            if (result.getParameters()[5] != null) {
+                access_token = "key=" + result.getParameters()[5];
                 return access_token;
             }
         }

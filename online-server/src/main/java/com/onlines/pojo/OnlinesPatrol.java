@@ -23,6 +23,10 @@ public class OnlinesPatrol {
 
     private String username;
 
+    private String dingKey;
+    private String feishuKey;
+    private String wechatKey;
+
     private Integer needLogin;
 
     public Integer getId() {
@@ -96,10 +100,33 @@ public class OnlinesPatrol {
     public void setUsername(String username) {
         this.username = username;
     }
+    public String getDingKey() {
+        return dingKey;
+    }
+
+    public void setDingKey(String dingKey) {
+        this.dingKey = dingKey;
+    }
+    public String getFeishuKey() {
+        return feishuKey;
+    }
+
+    public void setFeishuKey(String feishuKey) {
+        this.feishuKey = feishuKey;
+    }
+    public String getWechatKey() {
+        return wechatKey;
+    }
+
+    public void setWechatKey(String wechatKey) {
+        this.wechatKey = wechatKey;
+    }
     public Integer getNeedLogin() {
         return needLogin;
     }
     public void setNeedLogin(Integer needLogin) {
         this.needLogin = needLogin;
     }
+
+
 }

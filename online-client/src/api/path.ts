@@ -9,5 +9,6 @@ export default {
   getTimeoutCaseInfo: '/patrol/onlines/getTimeoutCaseInfo',
   getH5Stat: '/patrol/onlines/getH5Stat',
   getTestPlanList: '/patrol/onlines/getTestPlanList', // 数据看板-测试计划列表
-  resetDatum: 'patrol/onlines/resetDatum' // 重置基准图
+  resetDatum: 'patrol/onlines/resetDatum', // 重置基准图
+  getDatum: '/patrol/onlines/images' // 查看基准图
 }

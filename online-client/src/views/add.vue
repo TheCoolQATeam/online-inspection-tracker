@@ -1,7 +1,7 @@
 <template>
   <div class="add">
     <a-breadcrumb class="mb-20">
-      <a-breadcrumb-item><a href="/#/h5-monitor">H5线上巡检</a></a-breadcrumb-item>
+      <a-breadcrumb-item><a href="/case">H5线上巡检</a></a-breadcrumb-item>
       <a-breadcrumb-item>{{isEdit ? '编辑' : '新增'}}</a-breadcrumb-item>
     </a-breadcrumb>
     <a-form :model="formState" :label-col="labelCol" :wrapper-col="wrapperCol">
@@ -11,24 +11,30 @@
       <a-form-item label="巡检URL地址" name="url" :rules="[{ required: true, message: '请输入巡检URL地址' }]">
         <a-input v-model:value="formState.url" placeholder="请输入巡检URL地址" :disabled="isEdit"/>
       </a-form-item>
-      <a-form-item label="告警人" name="url">
-        <a-input v-model:value="formState.username" placeholder="请填写告警人邮箱，逗号分隔"/>
-      </a-form-item>
+      
       <a-form-item label="说明" name="htmlinfo">
         <a-input v-model:value="formState.htmlinfo" type="textarea" />
       </a-form-item>
       <a-form-item label="业务线" name="groupId" :rules="[{ required: true, message: '请选择业务线' }]">
         <a-select v-model:value="formState.groupId" placeholder="请选择业务线">
-          <a-select-option :value="1">保洁交易平台</a-select-option>
-          <a-select-option :value="2">通用平台</a-select-option>
+          <a-select-option :value="1">分组A</a-select-option>
+          <a-select-option :value="2">分组B</a-select-option>
         </a-select>
       </a-form-item>
-      <a-form-item label="是否需要登录" name="needLogin" :rules="[{ required: true, message: '请选择业务线' }]">
+      <a-form-item label="钉钉告警机器人key" name="dingKey">
+        <a-input v-model:value="formState.dingKey" type="text" placeholder="若需要触发钉钉机器人告警，请填写正确相应的key"/>
+      </a-form-item>
+      <a-form-item label="企微告警机器人key" name="wechatKey">
+        <a-input v-model:value="formState.wechatKey" type="text" placeholder="若需要触发微信机器人告警，请填写正确相应的key"/>
+      </a-form-item>
+      <a-form-item label="飞书告警机器人key" name="feishuKey">
+        <a-input v-model:value="formState.feishuKey" type="text" placeholder="若需要触发飞书机器人告警，请填写正确相应的key"/>
+      </a-form-item>
+      <!-- <a-form-item label="是否需要登录" name="needLogin" :rules="[{ required: true, message: '请选择业务线' }]">
         <a-select v-model:value="formState.needLogin" placeholder="请选择业务线">
           <a-select-option :value="0">否</a-select-option>
-          <a-select-option :value="1">是</a-select-option>
         </a-select>
-      </a-form-item>
+      </a-form-item> -->
       <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
         <a-button type="primary" @click="onSubmit">提交</a-button>
         <a-button class="ml-10" @click="onCancel">取消</a-button>
@@ -49,6 +55,9 @@ interface FormState {
   url: string;
   htmlinfo: string;
   username: string
+  dingKey?: string
+  wechatKey?: string
+  feishuKey?: string
   needLogin: number
 }
 
@@ -76,6 +85,9 @@ export default defineComponent({
       url: '',
       htmlinfo: '',
       username: '',
+      // dingKey: '',
+      // wechatKey: '',
+      // feishuKey: '',
       needLogin: 0
     })
 
@@ -90,7 +102,7 @@ export default defineComponent({
             '修改成功',
             2
           )
-          toPage('/h5-monitor')
+          toPage('/case')
         })
       } else {
         delete params.id
@@ -99,13 +111,13 @@ export default defineComponent({
             '新增成功',
             2
           )
-          toPage('/h5-monitor')
+          toPage('/case')
         })
       }
     }
 
     const onCancel = () => {
-      toPage('/h5-monitor')
+      toPage('/case')
     }
 
     const getBaseInfo = (id: string) => {
@@ -118,8 +130,10 @@ export default defineComponent({
         formState.url = data.url
         formState.htmlinfo = data.htmlinfo
         formState.username = data.username
+        formState.dingKey = data.dingKey
+        formState.wechatKey = data.wechatKey
+        formState.feishuKey = data.feishuKey
         formState.needLogin = Number(data.needLogin)
-        console.log('data.baseInfo', data)
       }).catch((err: any) => {
         console.log(err)
       })

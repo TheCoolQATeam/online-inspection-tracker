@@ -14,14 +14,15 @@ export default defineConfig({
     }
   },
   define: {
-    'process.env': process.env
+    'process.env': process.env,
+    'process.argv':  process.argv
   },
-  server: {  
-    proxy: {  
-      '^/patrol': {  
-        target: 'https://localhost:9090', // 代理目标地址  
-        changeOrigin: true, // 开启代理，在本地会创建一个虚拟服务端，然后发送请求的数据，同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题  
-      },
-    }
-  }  
+  // server: {  
+  //   proxy: {  
+  //     '^/patrol': {  
+  //       target: 'http://127.0.0.1:9091', // 代理目标地址  
+  //       changeOrigin: true, // 开启代理，在本地会创建一个虚拟服务端，然后发送请求的数据，同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题  
+  //     },
+  //   }
+  // }  
 })

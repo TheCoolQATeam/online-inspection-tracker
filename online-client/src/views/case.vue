@@ -5,9 +5,6 @@
           <a-descriptions-item label="页面标题">{{ data.baseInfo.title }}</a-descriptions-item>
           <a-descriptions-item label="页面简介">{{ data.baseInfo.htmlinfo }}</a-descriptions-item>
           <a-descriptions-item label="业务线">{{ groups[data.baseInfo.groupId] }}</a-descriptions-item>
-          <a-descriptions-item label="告警人">
-            {{ data.baseInfo.username }}
-          </a-descriptions-item>
           <a-descriptions-item label="页面URL"><a :href="data.baseInfo.url" target="_blank">{{ data.baseInfo.url }}</a></a-descriptions-item>
         </a-descriptions>
         <h1 class="mt-20">近30天执行情况</h1>

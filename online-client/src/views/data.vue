@@ -58,7 +58,7 @@ export default defineComponent({
     const range = ref('7days')
     const selecttedGroup = reactive({
       key: 1,
-      value: '保洁交易平台'
+      value: '分组A'
     })
     const beginDate = ref(0)
     const endDate = ref(0)

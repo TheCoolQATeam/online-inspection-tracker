@@ -6,7 +6,7 @@
         <template v-slot:bodyCell="{record, column}">
             <template v-if="column.dataIndex === 'passedNumRate'">
                 <span :style="{ color: record.passedNum===record.totalNum? 'green': 'red' }">
-                  {{ (record.passedNum / record.totalNum).toFixed(2) * 100 + '%' }}
+                  {{ ((record.passedNum / record.totalNum).toFixed(4) * 100).toFixed(2) + '%' }}
                 </span>
             </template>
         </template>

@@ -80,3 +80,7 @@ export const getTestPlanList = (params: any) => {
 export const resetDatum = (params: any) => {
   return service.get(resfulParamsToUrl(Path.resetDatum, params), { params })
 }
+
+export const getDatum = (params: any) => {
+  return service.get(resfulParamsToUrl(Path.getDatum, params), { params })
+}

@@ -3,6 +3,8 @@ import Home from '@/views/index.vue'
 import Stat from '@/views/data.vue'
 import Help from '@/views/help.vue'
 import TestPlan from '@/views/planList.vue'
+import Add from '@/views/add.vue'
+import CaseInfo from '@/views/case.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,17 +22,17 @@ const router = createRouter({
     {
       path: '/case/add',
       name: 'h5MonitorAdd',
-      component: () => import('@/views/add.vue')
+      component: Add
     },
     {
       path: '/case/edit/:id',
       name: 'h5MonitorEdit',
-      component: () => import('@/views/add.vue')
+      component: Add
     },
     {
       path: '/case/info/:id',
-      name: 'h5MonitorEdit',
-      component: () => import('@/views/case.vue')
+      name: 'h5MonitorInfo',
+      component: CaseInfo
     },
     {
       path: '/stat',
