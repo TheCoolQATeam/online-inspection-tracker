@@ -420,11 +420,10 @@
   </select>
   <select id="getTimeoutCaseInfo"  resultMap="CaseInfoMap">
     select
-    o.title,
-    c.id,
-    c.case_id,
-    c.create_time,MAX(c.response_time) as response_time,  c.states, c.failed_reason, count(*)
-<!--    <include refid="Case_Column_List" />-->
+    ANY_VALUE(o.title),
+    ANY_VALUE(c.id),
+    ANY_VALUE(c.case_id),
+    ANY_VALUE(c.create_time),MAX(c.response_time) as response_time,  ANY_VALUE(c.states), ANY_VALUE(c.failed_reason), count(*)
     FROM case_response c
     left join onlinespatrol o on c.case_id = o.id
     where c.response_time>3000
