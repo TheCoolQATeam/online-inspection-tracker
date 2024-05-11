@@ -18,7 +18,7 @@
   </template>
 
 <script lang="ts" setup>
-import { reactive, defineExpose, ref, defineProps } from 'vue'
+import { reactive, ref } from 'vue'
 import { getFailedCaseInfo } from '@/api/index'
 
 const dataSource = ref<any[]>([])

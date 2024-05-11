@@ -22,7 +22,7 @@
     </a-row>
 </template>
 <script lang="ts" setup>
-import { defineExpose, ref } from 'vue'
+import { ref } from 'vue'
 import { getH5Stat } from '@/api/index'
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons-vue'
 

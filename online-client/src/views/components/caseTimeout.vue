@@ -18,7 +18,7 @@
   </template>
 
 <script lang="ts" setup>
-import { reactive, defineExpose, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { getTimeoutCaseInfo } from '@/api/index'
 
 const dataSource = ref<any[]>([])

@@ -54,7 +54,7 @@ export default defineComponent({
 
 <style>
 .sidebar {
-  height: calc(100vh -64px);
+  height: calc(100vh - 64px);
   overflow: auto;
   background-color: #001529;
 }

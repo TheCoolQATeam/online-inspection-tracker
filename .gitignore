@@ -39,7 +39,6 @@ Thumbs.db
 node_modules
 .history
 .vscode
-dist/
 #*.zip
 
 # Log files

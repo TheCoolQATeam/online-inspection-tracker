@@ -10,11 +10,14 @@ CREATE TABLE `onlinespatrol` (
   `groupId` varchar(255) DEFAULT NULL COMMENT '业务线',
   `createTime` datetime DEFAULT CURRENT_TIMESTAMP,
   `datum_address` varchar(255) DEFAULT NULL COMMENT '基准图',
-  `datum_createtime` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '基准图创建时间',
+  `datum_createtime` datetime DEFAULT CURRENT_TIMESTAMP,
   `username` varchar(255) DEFAULT NULL COMMENT '告警人',
+  `ding_key` varchar(100) DEFAULT NULL COMMENT '钉钉机器人key',
+  `wechat_key` varchar(100) DEFAULT NULL COMMENT '企业微信机器人key',
+  `feishu_key` varchar(100) DEFAULT NULL COMMENT '飞书机器人key',
   `need_login` int(11) NOT NULL DEFAULT '0' COMMENT '0-不需要登录；1-必须登录',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=utf8;
 
 -- 用例执行结果
 CREATE TABLE `case_response` (

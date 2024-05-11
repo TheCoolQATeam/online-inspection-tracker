@@ -1,12 +1,20 @@
 import axios from 'axios'
 import { message } from 'ant-design-vue'
 
-export const baseURL = "http://127.0.0.1:9091";
+// 获取当前页面的HOST
+const getHost = () => {
+  const { protocol, host } = window.location;
+  return `${protocol}//${host}`;
+};
+
+export const baseURL = getHost();
 const service = axios.create({
   withCredentials: true,
   baseURL,
   timeout: 15000
 })
+
+
 
 service.interceptors.request.use(
   (config) => {
