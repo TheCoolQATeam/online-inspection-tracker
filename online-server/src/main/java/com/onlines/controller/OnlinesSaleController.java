@@ -158,8 +158,11 @@ public class OnlinesSaleController {
         TestNG testng = new TestNG();
         List<String> suite = Lists.newArrayList();
 
-//        suite.add("D:\\gitcode\\11\\online-inspection-tracker\\online-server\\src\\main\\resources\\testng.xml");
-        suite.add("E:\\wumj\\project\\github\\online-inspection-tracker\\online-server\\src\\main\\resources\\testng.xml");
+        String path = System.getProperty("user.dir") + "/online-server/src/main/resources/testng.xml";
+        System.out.println("path: " + path);
+
+        suite.add(path);
+//        suite.add("E:\\wumj\\project\\github\\online-inspection-tracker\\online-server\\src\\main\\resources\\testng.xml");
         //suite.add("D:/gitcode/11/online-inspection-tracker/online-server/src/main/resources/testng.xml");//path to xml..
         testng.setTestSuites(suite);
         testng.run();
