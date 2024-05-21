@@ -32,6 +32,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.testng.xml.XmlClass;
+import org.testng.xml.XmlSuite;
+import org.testng.xml.XmlTest;
 
 import java.io.IOException;
 
@@ -154,17 +157,24 @@ public class OnlinesSaleController {
     @GetMapping("/invokerTestng")
     public ResponseDto invokerTestng() throws ParseException {
         System.out.println("invokerTestng");
-        TestListenerAdapter tla = new TestListenerAdapter();
         TestNG testng = new TestNG();
-        List<String> suite = Lists.newArrayList();
+        // -- <suite>
+        XmlSuite suite = new XmlSuite();
+        suite.setName("线上监控自动化测试");
+        // -- <test>
+        XmlTest test = new XmlTest(suite);
+        test.setName("H5巡检");
+        // -- <classes>
+        List<XmlClass> classes = new ArrayList<XmlClass>();
+        // this means <class name = "com.onlines.onlineSaleTest.AutoCheckHtml">
+        classes.add(new XmlClass("com.onlines.onlineSaleTest.AutoCheckHtml"));
+        test.setXmlClasses(classes);
+        // 添加一个listener
+        suite.addListener("com.onlines.listeners.TestListener");
 
-        String path = System.getProperty("user.dir") + "/online-server/src/main/resources/testng.xml";
-        System.out.println("path: " + path);
-
-        suite.add(path);
-//        suite.add("E:\\wumj\\project\\github\\online-inspection-tracker\\online-server\\src\\main\\resources\\testng.xml");
-        //suite.add("D:/gitcode/11/online-inspection-tracker/online-server/src/main/resources/testng.xml");//path to xml..
-        testng.setTestSuites(suite);
+        List<XmlSuite> suites = new ArrayList<XmlSuite>();
+        suites.add(suite);
+        testng.setXmlSuites(suites);
         testng.run();
         return new ResponseDto(ErrCodelEnum.success.getCode(), null);
     }
