@@ -418,12 +418,31 @@
       AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
     </if>
   </select>
+<!--  <select id="getTimeoutCaseInfo"  resultMap="CaseInfoMap">-->
+<!--    select-->
+<!--    ANY_VALUE(o.title),-->
+<!--    ANY_VALUE(c.id),-->
+<!--    ANY_VALUE(c.case_id),-->
+<!--    ANY_VALUE(c.create_time),MAX(c.response_time) as response_time,  ANY_VALUE(c.states), ANY_VALUE(c.failed_reason), count(*)-->
+<!--    FROM case_response c-->
+<!--    left join onlinespatrol o on c.case_id = o.id-->
+<!--    where c.response_time>3000-->
+<!--    <if test="group != null and group != ''">-->
+<!--      AND  o.groupId = #{group}-->
+<!--    </if>-->
+<!--    <if test="beginDate != null and endDate != null">-->
+<!--      AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{beginDate},'%Y-%m-%d')-->
+<!--      AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')-->
+<!--    </if>-->
+<!--    group by c.case_id-->
+<!--    order by create_time desc-->
+<!--  </select>-->
   <select id="getTimeoutCaseInfo"  resultMap="CaseInfoMap">
     select
-    ANY_VALUE(o.title),
-    ANY_VALUE(c.id),
-    ANY_VALUE(c.case_id),
-    ANY_VALUE(c.create_time),MAX(c.response_time) as response_time,  ANY_VALUE(c.states), ANY_VALUE(c.failed_reason), count(*)
+    o.title,
+    c.id,
+    c.case_id,
+    c.create_time,MAX(c.response_time) as response_time,  c.states, c.failed_reason, count(*)
     FROM case_response c
     left join onlinespatrol o on c.case_id = o.id
     where c.response_time>3000
