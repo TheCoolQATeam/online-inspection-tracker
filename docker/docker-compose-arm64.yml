@@ -1,0 +1,45 @@
+
+
+version: "3"
+
+services:
+  inspection-mysql:
+    platform: linux/amd64
+    container_name: inspection-mysql
+    networks:
+      - my-network
+    build: 
+      context: ./mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - 3306:3306
+    restart: always
+
+  inspection-server:
+    container_name: inspection-server
+    networks:
+      - my-network
+    build:
+      context: ./server
+    ports:
+      - 9091:9091
+    restart: always
+    depends_on:
+      - inspection-mysql
+
+  inspection-web:
+    container_name: inspection-web
+    networks:
+      - my-network
+    build:
+      context: ./web
+    ports:
+      - 5173:5173
+    restart: always
+    depends_on:
+      - inspection-server
+
+networks:
+  my-network:
+    driver: bridge
