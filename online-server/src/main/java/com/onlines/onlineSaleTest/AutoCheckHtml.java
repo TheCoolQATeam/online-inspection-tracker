@@ -3,6 +3,7 @@ package com.onlines.onlineSaleTest;
 import com.alibaba.fastjson.JSONArray;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.Geolocation;
+import com.microsoft.playwright.options.LoadState;
 import com.onlines.listeners.MyReporter;
 import com.onlines.mapper.OnlinesPatrolMapper;
 import com.onlines.utils.*;
@@ -70,6 +71,7 @@ public class AutoCheckHtml {
         String imageName = title.concat("_").concat(Long.toString(currentTimeMillis));
         // 使用String的concat()方法拼接路径
         String imagePath = userDir.concat(File.separator).concat("online-images").concat(File.separator).concat(imageName).concat(".png");
+        page.waitForLoadState(LoadState.NETWORKIDLE); // 资源下载完毕
         page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get(imagePath)));
         Assert.assertEquals(page.title(), title);
         attachment("H5页面信息截图", new FileInputStream(imagePath));
@@ -92,9 +94,9 @@ public class AutoCheckHtml {
                     e.printStackTrace();
                 }
                 int xiangsi = Integer.parseInt(result);
-                if (xiangsi > 20) {
+                if (xiangsi > 60) {
                     Assert.assertTrue(true);
-                    System.out.println("图片对比相似率大于20:" + xiangsi);
+                    System.out.println("图片对比相似率大于60:" + xiangsi);
                 } else {
                     String ip = InetAddress.getLocalHost().getHostAddress();
                     System.out.println("服务器IP地址：" + ip);
@@ -103,7 +105,7 @@ public class AutoCheckHtml {
                     DingUtil.sendMsgPic(url, id, picUrl, title, dingKey);
                     WechatUtil.sendMsgPic(url, id, picUrl, title, wechatKey);
                     FeishuUtil.sendMsgPic(url, id, picUrl, title, feishuKey);
-                    System.out.println("图片对比相似率小于20:" + xiangsi);
+                    System.out.println("图片对比相似率小于60:" + xiangsi);
                 }
             }
         }
