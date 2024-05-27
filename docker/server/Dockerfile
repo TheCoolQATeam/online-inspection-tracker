@@ -21,15 +21,15 @@ apt-get clean && apt-get update && apt-get install -y vim iputils-ping telnet
 # 安装chrome浏览器122.0.6261.94
 #COPY google-chrome-stable_current_amd64.deb /inspection/
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-COPY /google-chrome-stable_current_amd64.deb /inspection/
-RUN chmod +x /inspection/google-chrome-stable_current_amd64.deb
+#COPY /google-chrome-stable_current_amd64.deb /inspection/
+RUN chmod +x /google-chrome-stable_current_amd64.deb
 
 # 此处会出现依赖关系错误执行失败，使用||true使执行失败时继续往下执行
-RUN dpkg -i /inspection/google-chrome-stable_current_amd64.deb || true
+RUN dpkg -i /google-chrome-stable_current_amd64.deb || true
 # 修复apt-get依赖关系
 RUN apt-get install -f -y
 # 再次执行安装chrome浏览器命令
-RUN dpkg -i /inspection/google-chrome-stable_current_amd64.deb
+RUN dpkg -i /google-chrome-stable_current_amd64.deb
 
 
 MAINTAINER inspection
