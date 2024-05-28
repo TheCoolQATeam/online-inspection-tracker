@@ -2,9 +2,11 @@
 
 ## 1、极速启动
 
-如果您不想修改任何配置，只想看看巡检系统有啥功能，下载完代码后，在 **当前工程下的docker文件夹** 下，执行如下命令：
+* 下载完代码后，编辑docker/web/default.conf文件，将server_name 127.0.0.1 中的127.0.0.1替换成你的服务器IP
 
-# arm架构下
+在 **当前工程下的docker文件夹** 下，执行如下命令：
+
+### arm架构下
 docker-compose -f docker-compose-arm64.yml up
 ```
 
@@ -34,8 +36,4 @@ inspection-server  | 2024-05-14 02:22:35.005  INFO 7 --- [           main] o.s.b
 inspection-server  | 2024-05-14 02:22:35.027  INFO 7 --- [           main] com.onlines.OnlinesApplication           : Started OnlinesApplication in 4.344 seconds (JVM running for 5.27)
 ```
 
-启动后，在浏览器输入 http://127.0.0.1:5173/ ，即可访问巡检系统平台。
-
-接下来还有一点需要注意的：
-
-* 若部署到服务器，需要其他机器访问，需要将docker-->web目录下default.conf文件server_name配置的127.0.0.1替换成服务器IP，启动后使用http://服务器IP:5173/ 访问即可。
+启动后，在浏览器输入 http://你的服务器IP:5173/ ，即可访问巡检系统平台。
