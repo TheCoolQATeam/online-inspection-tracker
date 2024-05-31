@@ -26,7 +26,7 @@ CREATE TABLE `case_response` (
   `case_id` bigint(20) NOT NULL COMMENT '用例ID',
   `states` bigint(20) DEFAULT NULL COMMENT '用例执行结果 1.成功;2.失败;3.忽略',
   `failed_reason` varchar(100) DEFAULT NULL COMMENT '用例执行失败原因',
-  `create_time` datetime DEFAULT CURRENT_TIMESTAMP
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `case_response_case_id_IDX` (`case_id`,`states`,`response_time`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=4323177 DEFAULT CHARSET=utf8 COMMENT='响应时间';
