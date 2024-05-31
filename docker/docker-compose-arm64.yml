@@ -12,6 +12,7 @@ services:
       context: ./mysql
     environment:
       MYSQL_ROOT_PASSWORD: 123456
+      TZ: Asia/Shanghai
     ports:
       - 3306:3306
     restart: always
@@ -22,6 +23,8 @@ services:
       - my-network
     build:
       context: ./server
+    environment:
+      TZ: Asia/Shanghai
     ports:
       - 9091:9091
     restart: always
@@ -34,6 +37,8 @@ services:
       - my-network
     build:
       context: ./web
+    environment:
+      TZ: Asia/Shanghai
     ports:
       - 5173:5173
     restart: always
