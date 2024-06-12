@@ -3,7 +3,6 @@
 <mapper namespace="com.onlines.mapper.TestPlanResultMapper">
   <resultMap id="BaseResultMap" type="com.onlines.pojo.TestPlanResult">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="jenkins_id" jdbcType="VARCHAR" property="jenkinsId" />
     <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="total_num" jdbcType="INTEGER" property="totalNum" />
     <result column="passed_num" jdbcType="INTEGER" property="passedNum" />
@@ -72,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, jenkins_id, url, total_num, passed_num, failed_num, skiped_num, begin_time, duration, 
+    id, url, total_num, passed_num, failed_num, skiped_num, begin_time, duration,
     create_time
   </sql>
   <select id="selectByExample" parameterType="com.onlines.pojo.TestPlanResultExample" resultMap="BaseResultMap">
@@ -106,7 +105,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.onlines.pojo.TestPlanResult">
-    insert into test_plan_result (id, jenkins_id, url, 
+    insert into test_plan_result (id, url,
       total_num, passed_num, failed_num, 
       skiped_num, begin_time, duration, 
       create_time)
@@ -120,9 +119,6 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
-      </if>
-      <if test="jenkinsId != null">
-        jenkins_id,
       </if>
       <if test="url != null">
         url,
@@ -194,9 +190,6 @@
       <if test="row.id != null">
         id = #{row.id,jdbcType=BIGINT},
       </if>
-      <if test="row.jenkinsId != null">
-        jenkins_id = #{row.jenkinsId,jdbcType=VARCHAR},
-      </if>
       <if test="row.url != null">
         url = #{row.url,jdbcType=VARCHAR},
       </if>
@@ -229,7 +222,6 @@
   <update id="updateByExample" parameterType="map">
     update test_plan_result
     set id = #{row.id,jdbcType=BIGINT},
-      jenkins_id = #{row.jenkinsId,jdbcType=VARCHAR},
       url = #{row.url,jdbcType=VARCHAR},
       total_num = #{row.totalNum,jdbcType=INTEGER},
       passed_num = #{row.passedNum,jdbcType=INTEGER},
@@ -245,9 +237,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.onlines.pojo.TestPlanResult">
     update test_plan_result
     <set>
-      <if test="jenkinsId != null">
-        jenkins_id = #{jenkinsId,jdbcType=VARCHAR},
-      </if>
       <if test="url != null">
         url = #{url,jdbcType=VARCHAR},
       </if>
@@ -277,7 +266,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.onlines.pojo.TestPlanResult">
     update test_plan_result
-    set jenkins_id = #{jenkinsId,jdbcType=VARCHAR},
+    set
       url = #{url,jdbcType=VARCHAR},
       total_num = #{totalNum,jdbcType=INTEGER},
       passed_num = #{passedNum,jdbcType=INTEGER},
