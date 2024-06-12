@@ -47,6 +47,7 @@ public class DateUtil {
         LocalDateTime localDateTime = localDate.atTime(23, 59, 59);
         return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
+
     /**
      * 获取当前时间afterDay之后的时间
      *
@@ -63,6 +64,26 @@ public class DateUtil {
     public static Date getToday() {
         Calendar c = Calendar.getInstance();
         return c.getTime();
+    }
+
+    /*
+     * 将字符串转换为日期
+     * @param strDate 日期字符串
+     * @param format 日期格式
+     * @return 日期
+     * @throws ParseException 解析异常
+     */
+    public static Date parseDate(String strDate, String format) {
+        try {
+            if (strDate == null || format == null) {
+                return null;
+            }
+            DateFormat df = new SimpleDateFormat(format);
+            return df.parse(strDate);
+        } catch (Exception ex) {
+
+        }
+        return null;
     }
 
 }

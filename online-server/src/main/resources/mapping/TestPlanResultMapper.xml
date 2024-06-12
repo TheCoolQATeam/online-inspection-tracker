@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlines.mapper.TestPlanResultMapper">
+  <resultMap id="BaseResultMap" type="com.onlines.pojo.TestPlanResult">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="jenkins_id" jdbcType="VARCHAR" property="jenkinsId" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="total_num" jdbcType="INTEGER" property="totalNum" />
+    <result column="passed_num" jdbcType="INTEGER" property="passedNum" />
+    <result column="failed_num" jdbcType="INTEGER" property="failedNum" />
+    <result column="skiped_num" jdbcType="INTEGER" property="skipedNum" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="duration" jdbcType="BIGINT" property="duration" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, jenkins_id, url, total_num, passed_num, failed_num, skiped_num, begin_time, duration, 
+    create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.onlines.pojo.TestPlanResultExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from test_plan_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from test_plan_result
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from test_plan_result
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.onlines.pojo.TestPlanResultExample">
+    delete from test_plan_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.onlines.pojo.TestPlanResult">
+    insert into test_plan_result (id, jenkins_id, url, 
+      total_num, passed_num, failed_num, 
+      skiped_num, begin_time, duration, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{jenkinsId,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{totalNum,jdbcType=INTEGER}, #{passedNum,jdbcType=INTEGER}, #{failedNum,jdbcType=INTEGER}, 
+      #{skipedNum,jdbcType=INTEGER}, #{beginTime,jdbcType=TIMESTAMP}, #{duration,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.onlines.pojo.TestPlanResult">
+    insert into test_plan_result
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="jenkinsId != null">
+        jenkins_id,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="totalNum != null">
+        total_num,
+      </if>
+      <if test="passedNum != null">
+        passed_num,
+      </if>
+      <if test="failedNum != null">
+        failed_num,
+      </if>
+      <if test="skipedNum != null">
+        skiped_num,
+      </if>
+      <if test="beginTime != null">
+        begin_time,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="jenkinsId != null">
+        #{jenkinsId,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNum != null">
+        #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="passedNum != null">
+        #{passedNum,jdbcType=INTEGER},
+      </if>
+      <if test="failedNum != null">
+        #{failedNum,jdbcType=INTEGER},
+      </if>
+      <if test="skipedNum != null">
+        #{skipedNum,jdbcType=INTEGER},
+      </if>
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.onlines.pojo.TestPlanResultExample" resultType="java.lang.Long">
+    select count(*) from test_plan_result
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update test_plan_result
+    <set>
+      <if test="row.id != null">
+        id = #{row.id,jdbcType=BIGINT},
+      </if>
+      <if test="row.jenkinsId != null">
+        jenkins_id = #{row.jenkinsId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.url != null">
+        url = #{row.url,jdbcType=VARCHAR},
+      </if>
+      <if test="row.totalNum != null">
+        total_num = #{row.totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="row.passedNum != null">
+        passed_num = #{row.passedNum,jdbcType=INTEGER},
+      </if>
+      <if test="row.failedNum != null">
+        failed_num = #{row.failedNum,jdbcType=INTEGER},
+      </if>
+      <if test="row.skipedNum != null">
+        skiped_num = #{row.skipedNum,jdbcType=INTEGER},
+      </if>
+      <if test="row.beginTime != null">
+        begin_time = #{row.beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.duration != null">
+        duration = #{row.duration,jdbcType=BIGINT},
+      </if>
+      <if test="row.createTime != null">
+        create_time = #{row.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update test_plan_result
+    set id = #{row.id,jdbcType=BIGINT},
+      jenkins_id = #{row.jenkinsId,jdbcType=VARCHAR},
+      url = #{row.url,jdbcType=VARCHAR},
+      total_num = #{row.totalNum,jdbcType=INTEGER},
+      passed_num = #{row.passedNum,jdbcType=INTEGER},
+      failed_num = #{row.failedNum,jdbcType=INTEGER},
+      skiped_num = #{row.skipedNum,jdbcType=INTEGER},
+      begin_time = #{row.beginTime,jdbcType=TIMESTAMP},
+      duration = #{row.duration,jdbcType=BIGINT},
+      create_time = #{row.createTime,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlines.pojo.TestPlanResult">
+    update test_plan_result
+    <set>
+      <if test="jenkinsId != null">
+        jenkins_id = #{jenkinsId,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="totalNum != null">
+        total_num = #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="passedNum != null">
+        passed_num = #{passedNum,jdbcType=INTEGER},
+      </if>
+      <if test="failedNum != null">
+        failed_num = #{failedNum,jdbcType=INTEGER},
+      </if>
+      <if test="skipedNum != null">
+        skiped_num = #{skipedNum,jdbcType=INTEGER},
+      </if>
+      <if test="beginTime != null">
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlines.pojo.TestPlanResult">
+    update test_plan_result
+    set jenkins_id = #{jenkinsId,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      total_num = #{totalNum,jdbcType=INTEGER},
+      passed_num = #{passedNum,jdbcType=INTEGER},
+      failed_num = #{failedNum,jdbcType=INTEGER},
+      skiped_num = #{skipedNum,jdbcType=INTEGER},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      duration = #{duration,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

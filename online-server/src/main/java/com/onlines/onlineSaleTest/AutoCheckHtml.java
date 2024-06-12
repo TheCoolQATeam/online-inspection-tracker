@@ -5,7 +5,9 @@ import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.Geolocation;
 import com.microsoft.playwright.options.LoadState;
 import com.onlines.listeners.MyReporter;
+import com.onlines.mapper.CaseResponseMapper;
 import com.onlines.mapper.OnlinesPatrolMapper;
+import com.onlines.pojo.CaseResponse;
 import com.onlines.utils.*;
 import com.onlines.pojo.OnlinesPatrol;
 import io.qameta.allure.Attachment;
@@ -17,6 +19,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -35,15 +38,13 @@ import static io.qameta.allure.Allure.attachment;
 /**
  * 自动化巡检核心方法
  */
-@Listeners({ MyReporter.class })
+@Listeners({MyReporter.class})
 @SpringBootTest(classes = com.onlines.onlineSaleTest.AutoCheckHtml.class)
 public class AutoCheckHtml {
     ImageComp imageComp = new ImageComp();
     DingUtil dingUtil = new DingUtil();
-
-
     private static OnlinesPatrolMapper onlinesPatrolMapper = SpringWrapper.getBean(OnlinesPatrolMapper.class);
-
+    private static CaseResponseMapper caseResponseMapper = SpringWrapper.getBean(CaseResponseMapper.class);
     private Playwright playwright = Playwright.create();
 
     Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
@@ -69,6 +70,7 @@ public class AutoCheckHtml {
         // 获取当前工作目录
         String userDir = System.getProperty("user.dir");
         String imageName = title.concat("_").concat(Long.toString(currentTimeMillis));
+        System.out.println("基准值地址"+imageName);
         // 使用String的concat()方法拼接路径
         String imagePath = userDir.concat(File.separator).concat("online-images").concat(File.separator).concat(imageName).concat(".png");
         page.waitForLoadState(LoadState.NETWORKIDLE); // 资源下载完毕
@@ -85,8 +87,10 @@ public class AutoCheckHtml {
                 onlinesPatrolMapper.updateByPrimaryKey(onlinesPatrol);
             } else {
                 String pic1 = imagePath;  // 本次图片
+                System.out.println("图片1的地址"+pic1);
                 // 基准值图片
                 String pic2 = userDir.concat(File.separator).concat("online-images").concat(File.separator).concat(onlinesPatrol.getDatumAddress()).concat(".png");//线上运行获取图片地址
+                System.out.println("图片2的地址"+pic2);
                 String result = null;
                 try {
                     result = imageComp.compareImage(pic2, pic1);
@@ -111,6 +115,7 @@ public class AutoCheckHtml {
         }
     }
 
+
     @AfterMethod
     public void getRunTime(ITestResult tr) {
         System.out.println("endTime --------------");
@@ -119,28 +124,29 @@ public class AutoCheckHtml {
         //响应时间
         long time = tr.getEndMillis() - tr.getStartMillis();
         System.out.println("响应时间：" + time);
-        //執行結果
-        JDBCUtil jdbcUtil = new JDBCUtil();
-        jdbcUtil.getConnection();
-        List<Map<String, Object>> result = jdbcUtil.queryForMapList("select id  from onlinespatrol where id  =" + id);
-        for (Map<String, Object> map : result) {
-            for (Map.Entry<String, Object> m : map.entrySet()) {
-                System.out.println("-----------" + m.getValue());
-                //用例序列号
-                long case_id = (Integer) m.getValue();
-                int caseResult = tr.getStatus();
-                if (tr.getStatus() == 2) {
-                    String failed_reason = tr.getThrowable().toString();
-                    System.out.println("----" + failed_reason);
-                    String query = "insert into case_response (case_id,response_time,states,failed_reason) values(?,?,?,?)";
-                    Object[] params = {case_id, time, caseResult, failed_reason};
-                    jdbcUtil.update(query, params);
-                }
-                String query = "insert into case_response (case_id,response_time,states) values(?,?,?)";
-                Object[] params = {case_id, time, caseResult};
-                jdbcUtil.update(query, params);
-            }
+        int case_id = (int) tr.getParameters()[0];
+
+        long caseResult = tr.getStatus();
+        if (tr.getStatus() == 2) {
+            String failed_reason = tr.getThrowable().toString();
+            saveCaseRes(case_id, time, caseResult, failed_reason);
+            System.out.println("case用例执行失败");
+        }else{
+            saveCaseRes(case_id, time, caseResult, "");
+            System.out.println("case用例执行成功");
         }
+
+    }
+
+
+    private void saveCaseRes(long case_id, long time, long caseResult, String failed_reason) {
+        CaseResponse caseResponse = new CaseResponse();
+        caseResponse.setCaseId(case_id);
+        caseResponse.setResponseTime(time);
+        caseResponse.setStates(caseResult);
+        caseResponse.setFailedReason(failed_reason);
+        caseResponse.setCreateTime(new Date());
+        caseResponseMapper.insert(caseResponse);
     }
 
     @DataProvider
@@ -172,14 +178,8 @@ public class AutoCheckHtml {
     @DataProvider
     public Object[][] HtmlDataTest() {
         return new Object[][]{
-//                {1, "百度一下页面", "百度一下22", "https://www.baidu.com/", null, null, null },
+                {1, "手机网易网", "手机网易网", "https://www.163.com/", null, null, null },
         };
     }
 
-    @DataProvider
-    public Object[][] LoginHtmlData() {
-        return new Object[][]{
-
-        };
-    }
 }
