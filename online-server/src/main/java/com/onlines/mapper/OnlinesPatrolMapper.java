@@ -51,7 +51,7 @@ public interface OnlinesPatrolMapper {
     Page<CaseInfo> getFailedCaseInfo(Date beginDate, Date endDate);
     Page<CaseInfo> getTimeoutCaseInfo(Date beginDate, Date endDate, Integer group);
     Page<CaseInfo> getTimeoutCaseInfo(Date beginDate, Date endDate);
-    Page<TestPlanInfo> getTestPlanList(Date beginDate, Date endDate);
+
     Integer getFailedCaseCount(Date beginDate, Date endDate, Integer group);
     Integer getTimeoutCaseCount(Date beginDate, Date endDate, Integer group);
     Integer getPlanCount(Date beginDate, Date endDate);

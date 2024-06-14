@@ -135,6 +135,10 @@ public class AutoCheckHtml {
             saveCaseRes(case_id, time, caseResult, "");
             System.out.println("case用例执行成功");
         }
+        page.close();
+        context.close();
+        browser.close();
+        playwright.close();
 
     }
 

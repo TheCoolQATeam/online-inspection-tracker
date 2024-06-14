@@ -15,7 +15,7 @@ server:
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   configLocation: classpath:mybatis.xml
-#  type-aliases-package: com.onlines.mapper
+  type-aliases-package: com.onlines.mapper
 
 #project:
 #  env: test

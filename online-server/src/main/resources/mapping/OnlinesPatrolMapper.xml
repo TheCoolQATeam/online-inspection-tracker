@@ -25,16 +25,7 @@
     <result column="response_time" jdbcType="VARCHAR" property="responseTime" />
     <result column="failed_reason" jdbcType="VARCHAR" property="failedReason" />
   </resultMap>
-  <resultMap id="testPlanMap" type="com.onlines.pojo.TestPlanInfo">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="duration" jdbcType="VARCHAR" property="duration" />
-    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
-    <result column="passed_num" jdbcType="INTEGER" property="passedNum" />
-    <result column="failed_num" jdbcType="INTEGER" property="failedNum" />
-    <result column="skiped_num" jdbcType="INTEGER" property="skippedNum" />
-    <result column="total_num" jdbcType="INTEGER" property="totalNum" />
-  </resultMap>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -274,9 +265,9 @@
     createTime = #{record.createtime,jdbcType=TIMESTAMP},
     datum_address = #{record.datumAddress,jdbcType=VARCHAR},
     datum_createtime = #{record.datumCreatetime,jdbcType=TIMESTAMP},
-    username = #{record.username,jdbcType=VARCHAR}
-    ding_key = #{record.ding_key,jdbcType=VARCHAR}
-    feishu_key = #{record.feishu_key,jdbcType=VARCHAR}
+    username = #{record.username,jdbcType=VARCHAR},
+    ding_key = #{record.ding_key,jdbcType=VARCHAR},
+    feishu_key = #{record.feishu_key,jdbcType=VARCHAR},
     wechat_key = #{record.wechat_key,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -329,7 +320,7 @@
     set url = #{url,jdbcType=VARCHAR},
     title = #{title,jdbcType=VARCHAR},
     htmlinfo = #{htmlinfo,jdbcType=VARCHAR},
-    `groupId` = #{groupId,jdbcType=VARCHAR},
+    groupId = #{groupId,jdbcType=VARCHAR},
     createTime = #{createtime,jdbcType=TIMESTAMP},
     datum_address = #{datumAddress,jdbcType=VARCHAR},
     datum_createtime = #{datumCreatetime,jdbcType=TIMESTAMP},
@@ -502,16 +493,16 @@
       AND DATE_FORMAT(createTime,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endTime},'%Y-%m-%d')
     </if>
   </select>
-  <select id="getTestPlanList"  resultMap="testPlanMap">
-    select *
-    FROM test_plan_result
-    where 1=1
-    <if test="beginDate != null and endDate != null">
-      AND DATE_FORMAT(begin_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{beginDate},'%Y-%m-%d')
-      AND DATE_FORMAT(begin_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
-    </if>
-    order by begin_time desc
-  </select>
+<!--  <select id="getTestPlanList"  resultMap="testPlanMap">-->
+<!--    select *-->
+<!--    FROM test_plan_result-->
+<!--    where 1=1-->
+<!--    <if test="beginDate != null and endDate != null">-->
+<!--      AND DATE_FORMAT(begin_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{beginDate},'%Y-%m-%d')-->
+<!--      AND DATE_FORMAT(begin_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')-->
+<!--    </if>-->
+<!--    order by begin_time desc-->
+<!--  </select>-->
 
 
   <select id="selectByTitle" parameterType="java.lang.String" resultMap="BaseResultMap">

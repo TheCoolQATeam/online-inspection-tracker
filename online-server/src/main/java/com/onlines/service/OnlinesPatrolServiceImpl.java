@@ -8,6 +8,7 @@ import com.onlines.entiry.CaseInfoDto;
 import com.onlines.entiry.DataReqDto;
 import com.onlines.entiry.OnlineSaleDto;
 import com.onlines.mapper.OnlinesPatrolMapper;
+import com.onlines.mapper.PlanResultTestMapper;
 import com.onlines.pojo.*;
 import com.onlines.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import java.util.Date;
 public class OnlinesPatrolServiceImpl implements IOnlinesPatrolService {
     @Autowired
     private OnlinesPatrolMapper onlinesPatrolMapper;
+
+    @Autowired
+    private PlanResultTestMapper planResultTestMapper;
 
     public void insertInfoTest(OnlinesPatrol onlinesPatrol) {
         onlinesPatrol.setCreatetime(new Date());
@@ -95,7 +99,7 @@ public class OnlinesPatrolServiceImpl implements IOnlinesPatrolService {
     public PageInfo getTestPlanList(Date beginDate, Date endDate, DataReqDto params) {
         PageInfo pageInfo = null;
         PageHelper.startPage(params.getPageNum(), params.getPageSize());
-        Page<TestPlanInfo> res = onlinesPatrolMapper.getTestPlanList(beginDate, endDate);
+        Page<PlanResultTest> res = planResultTestMapper.getTestPlanList(beginDate, endDate);
         pageInfo = new PageInfo<>(res);
         return pageInfo;
     }

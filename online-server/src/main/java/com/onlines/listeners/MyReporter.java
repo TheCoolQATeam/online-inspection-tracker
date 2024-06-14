@@ -1,8 +1,8 @@
 package com.onlines.listeners;
 
-import com.onlines.mapper.TestPlanResultMapper;
+import com.onlines.mapper.PlanResultTestMapper;
 import com.onlines.onlineSaleTest.SpringWrapper;
-import com.onlines.pojo.TestPlanResult;
+import com.onlines.pojo.PlanResultTest;
 import com.onlines.utils.DateUtil;
 import org.testng.IReporter;
 
@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class MyReporter implements IReporter {
-    private static TestPlanResultMapper testPlanResultMapper = SpringWrapper.getBean(TestPlanResultMapper.class);
+    private static PlanResultTestMapper testPlanResultMapper = SpringWrapper.getBean(PlanResultTestMapper.class);
 
     private int testsPass = 0;
 
@@ -127,13 +127,6 @@ public class MyReporter implements IReporter {
                 res.setFailedNum(testsFail);
                 res.setSkippedNum(testsSkip);
                 res.setTotalNum(testsPass + testsFail + testsSkip);
-
-//                JDBCUtil jdbcUtil = new JDBCUtil();
-//                jdbcUtil.getConnection();
-//                String query = "insert into test_plan_result (total_num, passed_num,failed_num, skiped_num, begin_time, duration  ) values(?,?,?,?,?,?)";
-//                Object[] params = {(testsPass + testsFail + testsSkip), testsPass, testsFail, testsSkip, beginTime,  totalTime};
-//                jdbcUtil.update(query, params);
-
                 saveTestPlan(testsPass,testsFail,testsSkip, beginTime, totalTime);
 
             } catch (Exception e) {
@@ -147,7 +140,7 @@ public class MyReporter implements IReporter {
     }
 
     private void saveTestPlan(int testsPass,int testsFail,int testsSkip,String beginTime,long totalTime){
-        TestPlanResult testPlanResult=new TestPlanResult();
+        PlanResultTest testPlanResult=new PlanResultTest();
         testPlanResult.setTotalNum(testsPass + testsFail + testsSkip);
         testPlanResult.setPassedNum(testsPass);
         testPlanResult.setFailedNum(testsFail);

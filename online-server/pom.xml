@@ -104,13 +104,19 @@
 			<artifactId>mybatis-generator-core</artifactId>
 			<version>1.4.0</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.23</version> <!-- 请使用最新的版本号 -->
 		</dependency>
+		<!--httpclient-->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.12</version>
+		</dependency>
+
+
 	</dependencies>
 <!--	多环境参数配置-->
 	<profiles>
@@ -158,8 +164,20 @@
 				<version>1.4.0</version>
 				<!--允许覆盖-->
 				<configuration>
+<!--					<overwrite>true</overwrite>-->
+<!--					<configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>-->
 					<overwrite>true</overwrite>
+					<verbose>true</verbose>
 				</configuration>
+<!--				加入下面这个依赖-->
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>8.0.23</version>
+					</dependency>
+				</dependencies>
+
 			</plugin>
 		</plugins>
 	</build>
