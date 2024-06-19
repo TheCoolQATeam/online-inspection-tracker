@@ -29,7 +29,7 @@ CREATE TABLE `case_response` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `case_response_case_id_IDX` (`case_id`,`states`,`response_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4323177 DEFAULT CHARSET=utf8 COMMENT='响应时间';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='响应时间';
 
 -- 测试计划
 CREATE TABLE `plan_result_test` (
@@ -42,4 +42,4 @@ CREATE TABLE `plan_result_test` (
   `duration` bigint(20) DEFAULT NULL COMMENT '执行时长',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36483 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

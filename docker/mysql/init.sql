@@ -1,6 +1,6 @@
+-- 数据库
+CREATE DATABASE `online_inspection_tracker`;
 
--- 使用数据库
-USE `online_inspection_tracker`;
 -- H5用例
 CREATE TABLE `onlinespatrol` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '本条记录的序号',
@@ -17,7 +17,7 @@ CREATE TABLE `onlinespatrol` (
   `feishu_key` varchar(100) DEFAULT NULL COMMENT '飞书机器人key',
   `need_login` int(11) NOT NULL DEFAULT '0' COMMENT '0-不需要登录；1-必须登录',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- 用例执行结果
 CREATE TABLE `case_response` (
@@ -25,14 +25,14 @@ CREATE TABLE `case_response` (
   `response_time` bigint(20) DEFAULT NULL COMMENT '用例响应时间',
   `case_id` bigint(20) NOT NULL COMMENT '用例ID',
   `states` bigint(20) DEFAULT NULL COMMENT '用例执行结果 1.成功;2.失败;3.忽略',
-  `failed_reason` varchar(100) DEFAULT NULL COMMENT '用例执行失败原因',
+  `failed_reason` varchar(200) DEFAULT NULL COMMENT '用例执行失败原因',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `case_response_case_id_IDX` (`case_id`,`states`,`response_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4323177 DEFAULT CHARSET=utf8 COMMENT='响应时间';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='响应时间';
 
 -- 测试计划
-CREATE TABLE `test_plan_result` (
+CREATE TABLE `plan_result_test` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `total_num` int(11) DEFAULT '0' COMMENT '用例总数',
   `passed_num` int(11) DEFAULT '0' COMMENT '用例通过数',
@@ -42,4 +42,4 @@ CREATE TABLE `test_plan_result` (
   `duration` bigint(20) DEFAULT NULL COMMENT '执行时长',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36483 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
