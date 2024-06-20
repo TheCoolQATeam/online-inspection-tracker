@@ -44,6 +44,6 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 表名和对应的实体类名-->
-        <table tableName="test_plan_result" domainObjectName="TestPlanResult"/>
+        <table tableName="plan_result_test" domainObjectName="TestPlanResult"/>
     </context>
 </generatorConfiguration>

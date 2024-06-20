@@ -454,7 +454,7 @@
     c.case_id,
     c.create_time, c.response_time, c.case_id, c.states, c.failed_reason
     <!--    <include refid="Case_Column_List" />-->
-    FROM test_plan_result c
+    FROM plan_result_test c
   </select>
   <select id="getTimeoutCaseCount"  resultType="Integer">
     select count(*)
@@ -470,7 +470,7 @@
   </select>
   <select id="getPlanCount"  resultType="Integer">
     select count(*)
-    FROM test_plan_result c
+    FROM plan_result_test c
     where 1=1
     <if test="beginDate != null and endDate != null">
       AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{beginDate},'%Y-%m-%d')
@@ -495,7 +495,7 @@
   </select>
 <!--  <select id="getTestPlanList"  resultMap="testPlanMap">-->
 <!--    select *-->
-<!--    FROM test_plan_result-->
+<!--    FROM plan_result_test-->
 <!--    where 1=1-->
 <!--    <if test="beginDate != null and endDate != null">-->
 <!--      AND DATE_FORMAT(begin_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{beginDate},'%Y-%m-%d')-->
