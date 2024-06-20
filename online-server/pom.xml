@@ -105,13 +105,13 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.23</version> <!-- 请使用最新的版本号 -->
+			<version>8.0.28</version> <!-- 请使用最新的版本号 -->
 		</dependency>
 		<!--httpclient-->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.5.12</version>
+			<version>4.5.13</version>
 		</dependency>
 
 
