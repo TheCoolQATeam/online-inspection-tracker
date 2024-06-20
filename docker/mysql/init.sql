@@ -1,5 +1,5 @@
--- 数据库
-CREATE DATABASE `online_inspection_tracker`;
+-- 使用数据库
+USE `online_inspection_tracker`;
 
 -- H5用例
 CREATE TABLE `onlinespatrol` (
