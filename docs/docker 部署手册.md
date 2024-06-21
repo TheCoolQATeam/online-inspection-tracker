@@ -6,7 +6,7 @@
 
 在 **当前工程下的docker文件夹** 下，执行如下命令：
 
-### arm架构下
+
 docker-compose -f docker-compose-arm64.yml up
 ```
 
