@@ -1,5 +1,7 @@
 package com.onlines.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class PlanResultTest {
@@ -13,10 +15,12 @@ public class PlanResultTest {
 
     private Integer skipedNum;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date beginTime;
 
     private Long duration;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
     public Long getId() {

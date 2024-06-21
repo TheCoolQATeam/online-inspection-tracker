@@ -46,8 +46,8 @@ const columns = [
   },
   {
     title: '用例忽略数',
-    dataIndex: 'skippedNum',
-    key: 'skippedNum'
+    dataIndex: 'skipedNum',
+    key: 'skipedNum'
   },
   {
     title: '执行时间',
