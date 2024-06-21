@@ -1,6 +1,5 @@
 package com.onlines.onlineSaleTest;
 
-import com.alibaba.fastjson.JSONArray;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.Geolocation;
 import com.microsoft.playwright.options.LoadState;
@@ -15,10 +14,7 @@ import io.qameta.allure.Description;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.testng.Assert;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,7 +26,6 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import static io.qameta.allure.Allure.attachment;
 
@@ -45,21 +40,28 @@ public class AutoCheckHtml {
     DingUtil dingUtil = new DingUtil();
     private static OnlinesPatrolMapper onlinesPatrolMapper = SpringWrapper.getBean(OnlinesPatrolMapper.class);
     private static CaseResponseMapper caseResponseMapper = SpringWrapper.getBean(CaseResponseMapper.class);
-    private Playwright playwright = Playwright.create();
+    Playwright playwright;
+    Browser browser;
+    BrowserContext context;
+    Page page;
 
-    Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
-    BrowserContext context = browser.newContext(new Browser.NewContextOptions()
-            .setUserAgent("online_inspection_tracker Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3765.0 Mobile Safari/537.36")
+    @BeforeClass
+    public void beforeClass(){
+        playwright = Playwright.create();
+        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
+        context = browser.newContext(new Browser.NewContextOptions()
+                .setUserAgent("online_inspection_tracker Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3765.0 Mobile Safari/537.36")
 //            .setViewportSize(360, 640)
-            .setViewportSize(411, 731)
+                .setViewportSize(411, 731)
 //            .setDeviceScaleFactor(2.625)
-            .setDeviceScaleFactor(1.0)
-            .setIsMobile(true)
-            .setHasTouch(true)
-            .setLocale("zh-CN")
-            .setGeolocation(new Geolocation(30.228932, 120.12792))
-            .setPermissions(Arrays.asList("geolocation")));
-    Page page = context.newPage();
+                .setDeviceScaleFactor(1.0)
+                .setIsMobile(true)
+                .setHasTouch(true)
+                .setLocale("zh-CN")
+                .setGeolocation(new Geolocation(30.228932, 120.12792))
+                .setPermissions(Arrays.asList("geolocation")));
+        page = context.newPage();
+    }
 
     @Description("遍历页面可用状态")
     @Attachment
@@ -115,7 +117,6 @@ public class AutoCheckHtml {
         }
     }
 
-
     @AfterMethod
     public void getRunTime(ITestResult tr) {
         System.out.println("endTime --------------");
@@ -135,13 +136,16 @@ public class AutoCheckHtml {
             saveCaseRes(case_id, time, caseResult, "");
             System.out.println("case用例执行成功");
         }
+    }
+
+    @AfterClass
+    public void afterClass(){
+        System.out.println("销毁浏览器");
         page.close();
         context.close();
         browser.close();
         playwright.close();
-
     }
-
 
     private void saveCaseRes(long case_id, long time, long caseResult, String failed_reason) {
         CaseResponse caseResponse = new CaseResponse();
