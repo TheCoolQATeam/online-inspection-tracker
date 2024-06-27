@@ -25,6 +25,7 @@
 <script lang="ts">
 import { defineComponent, reactive, onMounted, ref } from 'vue'
 import { getCaseInfo, getCaseBaseInfo } from '@/api/index'
+import type { CaseBaseInfo } from '@/api/type'
 import { useRoute } from 'vue-router'
 import { groups } from '@/common/data'
 
@@ -33,7 +34,7 @@ export default defineComponent({
   setup () {
     const dataSource = ref<any[]>([])
     const data = reactive({
-      baseInfo: {}
+      baseInfo: {} as CaseBaseInfo
     })
     const route = useRoute()
     const id = route.params?.id

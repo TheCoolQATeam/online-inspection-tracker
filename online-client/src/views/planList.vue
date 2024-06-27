@@ -6,7 +6,7 @@
         <template v-slot:bodyCell="{record, column}">
             <template v-if="column.dataIndex === 'passedNumRate'">
                 <span :style="{ color: record.passedNum===record.totalNum? 'green': 'red' }">
-                  {{ ((record.passedNum / record.totalNum).toFixed(4) * 100).toFixed(2) + '%' }}
+                  {{ record.rate }}
                 </span>
             </template>
         </template>
@@ -17,6 +17,7 @@
 <script lang="ts" setup>
 import { reactive, ref, onMounted } from 'vue'
 import { getTestPlanList } from '@/api/index'
+import type { TestPlan } from '@/api/type'
 import { msToMinutes } from '@/common/util'
 import moment from 'moment'
 
@@ -87,11 +88,12 @@ const getItems = (pageNum?: number) => {
     pageSize: pagination.pageSize
   }
   getTestPlanList(params).then((res: any) => {
-    console.log('plan')
-    dataSource.value = res.list.map((item: any) => {
+    dataSource.value = res.list.map((item: TestPlan) => {
+      const tmp: string = (item.passedNum / item.totalNum).toFixed(4);
       return {
         ...item,
-        key: item.id
+        key: item.id, 
+        rate: (Number(tmp) * 100).toFixed(2) + '%'
       }
     })
     pagination.total = res.total
