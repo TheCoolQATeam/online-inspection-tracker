@@ -9,8 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 public class OnlinesApplication {
 	public static void main(String[] args) {
-
-		String str= System.getProperty("user.dir");
 		SpringApplication.run(OnlinesApplication.class, args);
 	}
 

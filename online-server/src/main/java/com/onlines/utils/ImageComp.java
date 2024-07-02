@@ -1,14 +1,19 @@
 package com.onlines.utils;
 
+import com.onlines.controller.OnlinesSaleController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.MalformedURLException;
 
 public class ImageComp {
+    private static final Logger logger= LoggerFactory.getLogger(OnlinesSaleController.class);
     // 改变成二进制码
     public static String[][] getPX(String args) throws MalformedURLException {
-        System.out.println("getPX:" + args);
+        logger.info("getPX:" + args);
 //        URL url = new URL(args);//a服务器取图片使用方法
         int[] rgb = new int[3];
 
@@ -50,16 +55,16 @@ public class ImageComp {
     public String compareImage(String imgPath1, String imgPath2) throws MalformedURLException {
         String[] images = {imgPath1, imgPath2};
         if (images.length == 0) {
-            System.out.println("Usage >java BMPLoader ImageFile.bmp");
+            logger.info("Usage >java BMPLoader ImageFile.bmp");
             System.exit(0);
         }
 
         // 获取图片每个像素的rbg数组
-        System.out.println("list0");
+        logger.info("list0");
         String[][] list1 = getPX(images[0]);
-        System.out.println("list1");
+        logger.info("list1");
         String[][] list2 = getPX(images[1]);
-        System.out.println("list2");
+        logger.info("list2");
         int xiangsi = 0;
         int busi = 0;
         int i = 0, j = 0;
@@ -104,15 +109,15 @@ public class ImageComp {
             baifen = "100";
         }
 
-        System.out.println("相似像素数量：" + xiangsi + " 不相似像素数量：" + busi + " 相似率：" + Integer.parseInt(baifen) + "%");
-        System.out.println(baifen);
+        logger.info("相似像素数量：" + xiangsi + " 不相似像素数量：" + busi + " 相似率：" + Integer.parseInt(baifen) + "%");
+        logger.info(baifen);
         return baifen;
 
     }
 
     public static void main(String[] args) throws MalformedURLException {
 //        new ImageComp().compareImage("https://lupic.cdn.bcebos.com/20220812/3087527850_14_600_429.jpg", "https://lupic.cdn.bcebos.com/20200412/3027404477_14_747_533.jpg");//不相同图片
-        new ImageComp().compareImage("https://lupic.cdn.bcebos.com/20220812/3087527850_14_600_429.jpg", "https://lupic.cdn.bcebos.com/20220812/3087527850_14_600_429.jpg");//相同图片
+//        new ImageComp().compareImage("https://lupic.cdn.bcebos.com/20220812/3087527850_14_600_429.jpg", "https://lupic.cdn.bcebos.com/20220812/3087527850_14_600_429.jpg");//相同图片
     }
 
 }

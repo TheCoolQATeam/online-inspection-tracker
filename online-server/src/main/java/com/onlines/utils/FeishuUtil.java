@@ -1,11 +1,8 @@
 package com.onlines.utils;
-
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
-
 import com.alibaba.fastjson.JSONObject;
 import org.testng.ITestResult;
-
 public class FeishuUtil {
     // 告警内容
     public static String setMsgContent(ITestResult result){

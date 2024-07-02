@@ -1,9 +1,12 @@
 package com.onlines.listeners;
 
+import com.onlines.controller.OnlinesSaleController;
 import com.onlines.mapper.PlanResultTestMapper;
 import com.onlines.onlineSaleTest.SpringWrapper;
 import com.onlines.pojo.PlanResultTest;
 import com.onlines.utils.DateUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.IReporter;
 
 import com.onlines.entiry.TestPlanDto;
@@ -14,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class MyReporter implements IReporter {
+    private static final Logger logger= LoggerFactory.getLogger(OnlinesSaleController.class);
     private static PlanResultTestMapper testPlanResultMapper = SpringWrapper.getBean(PlanResultTestMapper.class);
 
     private int testsPass = 0;
@@ -93,7 +97,7 @@ public class MyReporter implements IReporter {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            System.out.println("测试结果："+ res);
+            logger.info("测试结果："+ res);
 
         } catch (Exception e) {
             e.printStackTrace();

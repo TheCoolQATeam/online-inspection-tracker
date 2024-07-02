@@ -33,18 +33,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 <!--			<scope>test</scope>-->
 		</dependency>
-		<dependency>
-			<groupId>org.mybatis.spring.boot</groupId>
-			<artifactId>mybatis-spring-boot-starter-test</artifactId>
-			<version>3.0.2</version>
-<!--			<scope>test</scope>-->
-		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>mysql</groupId>-->
-<!--			<artifactId>mysql-connector-java</artifactId>-->
-<!--			<version>8.0.20</version>-->
-<!--		</dependency>-->
+
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
@@ -67,6 +57,7 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+<!--		<待检测包>-->
 		<dependency>
 			<groupId>commons-dbutils</groupId>
 			<artifactId>commons-dbutils</artifactId>
@@ -88,6 +79,14 @@
 			<groupId>com.microsoft.playwright</groupId>
 			<artifactId>playwright</artifactId>
 			<version>1.11.0</version>
+		</dependency>
+
+<!--log日志-->
+		<!-- Logback implementation -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3</version>
 		</dependency>
 
 
@@ -142,7 +141,6 @@
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>application.yml</include>
-<!--					<include>application-${profileActive}.yml</include>-->
 					<include>**/*.properties</include>
 					<include>**/*.xml</include>
 				</includes>
@@ -154,29 +152,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!--其中的⼀个插件：mybatis逆向⼯程插件-->
-			<plugin>
-				<!--插件的GAV坐标-->
-				<groupId>org.mybatis.generator</groupId>
-				<artifactId>mybatis-generator-maven-plugin</artifactId>
-				<version>1.3.7</version>
-				<!--允许覆盖-->
-				<configuration>
-<!--					<overwrite>true</overwrite>-->
-<!--					<configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>-->
-					<overwrite>true</overwrite>
-					<verbose>true</verbose>
-				</configuration>
-<!--				加入下面这个依赖-->
-				<dependencies>
-					<dependency>
-						<groupId>mysql</groupId>
-						<artifactId>mysql-connector-java</artifactId>
-						<version>8.0.23</version>
-					</dependency>
-				</dependencies>
 
-			</plugin>
 		</plugins>
 	</build>
 

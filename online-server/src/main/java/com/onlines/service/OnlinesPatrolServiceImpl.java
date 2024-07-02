@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.onlines.controller.OnlinesSaleController;
 import com.onlines.entiry.CaseInfoDto;
 import com.onlines.entiry.DataReqDto;
 import com.onlines.entiry.OnlineSaleDto;
@@ -11,6 +12,8 @@ import com.onlines.mapper.OnlinesPatrolMapper;
 import com.onlines.mapper.PlanResultTestMapper;
 import com.onlines.pojo.*;
 import com.onlines.utils.DateUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,7 @@ import java.util.Date;
 
 @Service
 public class OnlinesPatrolServiceImpl implements IOnlinesPatrolService {
+    private static final Logger logger= LoggerFactory.getLogger(OnlinesSaleController.class);
     @Autowired
     private OnlinesPatrolMapper onlinesPatrolMapper;
 
@@ -55,17 +59,16 @@ public class OnlinesPatrolServiceImpl implements IOnlinesPatrolService {
     }
 
     public PageInfo getCaseExecInfo(CaseInfoDto caseInfoDto) {
-        OnlinesPatrolExample onlinesPatrolExample = null;
         PageInfo pageInfo = null;
         PageHelper.startPage(caseInfoDto.getPageNum(), caseInfoDto.getPageSize());
-        System.out.println("分页参数====" + caseInfoDto.getPageNum() + "," + caseInfoDto.getPageSize());
+        logger.info("分页参数====" + caseInfoDto.getPageNum() + "," + caseInfoDto.getPageSize());
         // 最多查询近30天
         Date endDate = DateUtil.getToday();
         Date beginDate =   DateUtil.getAfterDayDate(endDate, -30);
 
         Page<CaseInfo> res = onlinesPatrolMapper.getCaseInfo(caseInfoDto.getCaseId(), beginDate ,endDate );
         pageInfo = new PageInfo<>(res);
-        System.out.println("查询结果====" + JSON.toJSONString(res));
+        logger.info("查询结果====" + JSON.toJSONString(res));
         return pageInfo;
     }
 
@@ -75,9 +78,8 @@ public class OnlinesPatrolServiceImpl implements IOnlinesPatrolService {
     }
 
     public PageInfo getFailedCaseInfo(Date beginDate, Date endDate, DataReqDto params) {
-        System.out.println("开始日期" + beginDate.toString());
-        System.out.println("结束日期" + endDate.toString());
-        OnlinesPatrolExample onlinesPatrolExample = null;
+        logger.info("开始日期" + beginDate.toString());
+        logger.info("结束日期" + endDate.toString());
         PageInfo pageInfo = null;
         PageHelper.startPage(params.getPageNum(), params.getPageSize());
         Page<CaseInfo> res = onlinesPatrolMapper.getFailedCaseInfo(beginDate, endDate, params.getGroup());
@@ -86,9 +88,8 @@ public class OnlinesPatrolServiceImpl implements IOnlinesPatrolService {
     }
 
     public PageInfo getTimeoutCaseInfo(Date beginDate, Date endDate, DataReqDto params) {
-        System.out.println("开始日期" + beginDate.toString());
-        System.out.println("结束日期" + endDate.toString());
-        OnlinesPatrolExample onlinesPatrolExample = null;
+        logger.info("开始日期" + beginDate.toString());
+        logger.info("结束日期" + endDate.toString());
         PageInfo pageInfo = null;
         PageHelper.startPage(params.getPageNum(), params.getPageSize());
         Page<CaseInfo> res = onlinesPatrolMapper.getTimeoutCaseInfo(beginDate, endDate, params.getGroup());

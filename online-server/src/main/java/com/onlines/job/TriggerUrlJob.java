@@ -1,6 +1,8 @@
 package com.onlines.job;
 
 import com.onlines.controller.OnlinesSaleController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,16 +14,17 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class TriggerUrlJob implements InitializingBean {
+    private static final Logger logger= LoggerFactory.getLogger(OnlinesSaleController.class);
     @Autowired
     private OnlinesSaleController onlinesSaleController;
 
     public void triggerUrlTask() {
         try {
-            System.out.println("开始执行 " + new Date());
+            logger.info("开始执行 " + new Date());
             onlinesSaleController.invokerTestng();
         } catch (Exception ex) {
             ex.printStackTrace();
-            System.out.println("invokerTestng接口异常" + ex);
+            logger.info("invokerTestng接口异常" + ex);
         }
 
     }

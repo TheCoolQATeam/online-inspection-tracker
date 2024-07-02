@@ -12,9 +12,10 @@ import com.onlines.pojo.H5Stat;
 import com.onlines.pojo.OnlinesPatrol;
 import com.onlines.service.IOnlinesPatrolService;
 import com.onlines.utils.DateUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.web.bind.annotation.*;
-import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
 import org.testng.collections.Lists;
 
@@ -42,13 +43,14 @@ import java.io.IOException;
 @RestController
 @RequestMapping(value = "patrol/onlines")
 public class OnlinesSaleController {
+    private static final Logger logger= LoggerFactory.getLogger(OnlinesSaleController.class);
     @Resource
     private IOnlinesPatrolService onlinesPatrolService;
     @Resource
     private OnlinesPatrolMapper onlinesPatrolMapper;
     @GetMapping("/selectInfo")
     public ResponseDto OnlinePatrolSelect(OnlineSaleDto onlineSaleDto) {
-        System.out.println("入參：" + JSON.toJSONString(onlineSaleDto));
+        logger.info("查询入參：" + JSON.toJSONString(onlineSaleDto));
         PageInfo pageInfo = onlinesPatrolService.selectAll(onlineSaleDto);
         return new ResponseDto(ErrCodelEnum.success.getCode(), pageInfo);
     }
@@ -56,7 +58,7 @@ public class OnlinesSaleController {
     @PostMapping("/insertInfo")
     @ResponseBody
     public ResponseDto OnlinePatrolAdd(@RequestBody OnlinesPatrol onlinesPatrol) {
-        System.out.println("入參：" + JSON.toJSONString(onlinesPatrol));
+        logger.info("插入入參：" + JSON.toJSONString(onlinesPatrol));
         if (onlinesPatrol.getUrl() == null || onlinesPatrol.getTitle() == null || onlinesPatrol.getHtmlinfo() == null || onlinesPatrol.getGroupId() == null) {
             return new ResponseDto(ErrCodelEnum.fail.getCode());
         }
@@ -91,21 +93,21 @@ public class OnlinesSaleController {
 
     @GetMapping("/getCaseExecInfo")
     public ResponseDto getCaseExecInfo(CaseInfoDto caseInfoDto) {
-        System.out.println("入參：" + JSON.toJSONString(caseInfoDto));
+        logger.info("入參：" + JSON.toJSONString(caseInfoDto));
         PageInfo pageInfo = onlinesPatrolService.getCaseExecInfo(caseInfoDto);
         return new ResponseDto(ErrCodelEnum.success.getCode(), pageInfo);
     }
 
     @GetMapping("/getCaseBaseInfo")
     public ResponseDto getCaseBaseInfo(CaseInfoDto caseInfoDto) {
-        System.out.println("入參：" + JSON.toJSONString(caseInfoDto));
+        logger.info("入參：" + JSON.toJSONString(caseInfoDto));
         OnlinesPatrol onlinesPatrol = onlinesPatrolService.getCaseBaseInfo(caseInfoDto);
         return new ResponseDto(ErrCodelEnum.success.getCode(), onlinesPatrol);
     }
 
     @GetMapping("/getFailedCaseInfo")
     public ResponseDto getFailedCaseInfo(DataReqDto params) throws ParseException {
-        System.out.println("入參" + params);
+        logger.info("入參" + params);
         Integer beginDay = params.getBeginDate();
         Integer endDay = params.getEndDate();
         Integer group = params.getGroup();
@@ -118,7 +120,7 @@ public class OnlinesSaleController {
 
     @GetMapping("/getTimeoutCaseInfo")
     public ResponseDto getTimeoutCaseInfo(DataReqDto params) throws ParseException {
-        System.out.println("入參" + params);
+        logger.info("入參" + params);
         Integer beginDay = params.getBeginDate();
         Integer endDay = params.getEndDate();
         Integer group = params.getGroup();
@@ -131,7 +133,7 @@ public class OnlinesSaleController {
 
     @GetMapping("/getTestPlanList")
     public ResponseDto getTestPlanList(DataReqDto params) throws ParseException {
-        System.out.println("入參" + params);
+        logger.info("入參" + params);
         Integer beginDay = params.getBeginDate();
         Integer endDay = params.getEndDate();
         if (beginDay == null || endDay == null) {
@@ -143,7 +145,7 @@ public class OnlinesSaleController {
 
     @GetMapping("/getH5Stat")
     public ResponseDto getH5Stat(DataReqDto params) throws ParseException {
-        System.out.println("入參" + params);
+        logger.info("入參" + params);
         Integer beginDay = params.getBeginDate();
         Integer endDay = params.getEndDate();
         Integer group = params.getGroup();
@@ -156,7 +158,7 @@ public class OnlinesSaleController {
 
     @GetMapping("/invokerTestng")
     public ResponseDto invokerTestng() throws ParseException {
-        System.out.println("invokerTestng");
+        logger.info("invokerTestng");
         TestNG testng = new TestNG();
         // -- <suite>
         XmlSuite suite = new XmlSuite();
@@ -181,15 +183,15 @@ public class OnlinesSaleController {
 
     @GetMapping(value = "/images",produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<InputStreamResource> getImage(@RequestParam String imageName, HttpServletResponse response) throws IOException {
-        System.out.println("images");
-        System.out.println(imageName);
+        logger.info("images");
+        logger.info(imageName);
         // 同样的图片资源路径定义
         Path dir = Paths.get(System.getProperty("user.dir") + "/online-images");
         File file = new File(dir + "/" + imageName + ".png");
 
         // 检查资源是否存在
         if (!file.exists()) {
-            System.out.println("资源不存在：" + file.exists());
+            logger.info("资源不存在：" + file.exists());
             return ResponseEntity.notFound().build();
         }
 

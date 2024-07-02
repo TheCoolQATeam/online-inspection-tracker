@@ -1,11 +1,13 @@
 package com.onlines.utils;
-
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import com.alibaba.fastjson.JSONObject;
+import com.onlines.controller.OnlinesSaleController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
-
 public class WechatUtil {
+    private static final Logger logger= LoggerFactory.getLogger(OnlinesSaleController.class);
     public static String setMsgContent(ITestResult result){
         String caseDescription = result.getMethod().getDescription();
         Object[] caseParameters = result.getParameters();
@@ -35,7 +37,7 @@ public class WechatUtil {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("msgtype", "text");
             jsonObject.put("text", content);
-            System.out.println("入参：" + jsonObject.toJSONString());
+            logger.info("入参：" + jsonObject.toJSONString());
 
             HttpResponse res = HttpRequest.post(url).header("Content-Type", "application/json").body(jsonObject.toJSONString()).execute();
             return res.body();
@@ -65,10 +67,10 @@ public class WechatUtil {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("msgtype", "text");
         jsonObject.put("text", content);
-        System.out.println("入参：" + jsonObject.toJSONString());
+        logger.info("入参：" + jsonObject.toJSONString());
 
         HttpResponse DingResponse = HttpRequest.post(url).header("Content-Type", "application/json").body(jsonObject.toJSONString()).execute();
-        System.out.println(DingResponse.body());
+        logger.info(DingResponse.body());
         return DingResponse.body();
     }
 

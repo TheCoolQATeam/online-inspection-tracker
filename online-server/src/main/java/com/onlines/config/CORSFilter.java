@@ -1,5 +1,9 @@
 package com.onlines.config;
 
+import com.onlines.controller.OnlinesSaleController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
@@ -7,9 +11,10 @@ import java.io.IOException;
 
 @WebFilter(filterName = "corsFilter")
 public class CORSFilter implements Filter{
+    private static final Logger logger= LoggerFactory.getLogger(OnlinesSaleController.class);
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("初始化filter==========================");
+        logger.info("初始化filter==========================");
     }
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -19,11 +24,11 @@ public class CORSFilter implements Filter{
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type,Access-Token,Authorization,ybg");
         filterChain.doFilter(servletRequest, servletResponse);
-        System.out.println("filter==========================");
+        logger.info("filter==========================");
     }
     @Override
     public void destroy() {
-        System.out.println("销毁filter==========================");
+        logger.info("销毁filter==========================");
     }
 
 }
