@@ -64,7 +64,7 @@ public class AutoCheckHtml {
     }
 
     @Description("遍历页面可用状态")
-    @Test(priority = 0, description = "遍历页面可用状态", dataProvider = "HtmlDataTest", retryAnalyzer = MyRetry.class)
+    @Test(priority = 0, description = "遍历页面可用状态", dataProvider = "HtmlData", retryAnalyzer = MyRetry.class)
     public void testHtmlServiceability(int id, String htmlinfo, String title, String url, String dingKey, String wechatKey, String feishuKey) throws FileNotFoundException, UnknownHostException {
         page.navigate(url);
         long currentTimeMillis = System.currentTimeMillis();
