@@ -49,8 +49,20 @@ public class AutoCheckHtml {
 
     @BeforeClass
     public void beforeClass(){
+        logger.info("创建playwright浏览器对象");
         playwright = Playwright.create();
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(true));
+    }
+
+    @AfterClass
+    public void afterClass(){
+        logger.info("销毁playwright浏览器对象");
+        playwright.close();
+    }
+
+    @BeforeMethod
+    void createContextAndPage() {
+        logger.info("创建newContext对象");
         context = browser.newContext(new Browser.NewContextOptions()
                 .setUserAgent("online_inspection_tracker Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3765.0 Mobile Safari/537.36")
                 .setViewportSize(411, 731)
@@ -60,7 +72,32 @@ public class AutoCheckHtml {
                 .setLocale("zh-CN")
                 .setGeolocation(new Geolocation(30.228932, 120.12792))
                 .setPermissions(Arrays.asList("geolocation")));
+        logger.info("创建newPage()对象");
         page = context.newPage();
+    }
+
+    @AfterMethod
+    public void getRunTime(ITestResult tr) {
+        logger.info("endTime --------------");
+        int id;
+        id = (int) tr.getParameters()[0];
+        //响应时间
+        long time = tr.getEndMillis() - tr.getStartMillis();
+        logger.info("响应时间：" + time);
+        int case_id = (int) tr.getParameters()[0];
+
+        long caseResult = tr.getStatus();
+        if (tr.getStatus() == 2) {
+            String failed_reason = tr.getThrowable().toString();
+            saveCaseRes(case_id, time, caseResult, failed_reason);
+            logger.info("case用例执行失败");
+        }else{
+            saveCaseRes(case_id, time, caseResult, "");
+            logger.info("case用例执行成功");
+        }
+
+        logger.info("销毁context对象");
+        context.close();
     }
 
     @Description("遍历页面可用状态")
@@ -114,36 +151,6 @@ public class AutoCheckHtml {
                 }
             }
         }
-    }
-
-    @AfterMethod
-    public void getRunTime(ITestResult tr) {
-        logger.info("endTime --------------");
-        int id;
-        id = (int) tr.getParameters()[0];
-        //响应时间
-        long time = tr.getEndMillis() - tr.getStartMillis();
-        logger.info("响应时间：" + time);
-        int case_id = (int) tr.getParameters()[0];
-
-        long caseResult = tr.getStatus();
-        if (tr.getStatus() == 2) {
-            String failed_reason = tr.getThrowable().toString();
-            saveCaseRes(case_id, time, caseResult, failed_reason);
-            logger.info("case用例执行失败");
-        }else{
-            saveCaseRes(case_id, time, caseResult, "");
-            logger.info("case用例执行成功");
-        }
-    }
-
-    @AfterClass
-    public void afterClass(){
-        logger.info("销毁浏览器");
-        page.close();
-        context.close();
-        browser.close();
-        playwright.close();
     }
 
     private void saveCaseRes(long case_id, long time, long caseResult, String failed_reason) {
