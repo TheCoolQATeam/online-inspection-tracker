@@ -56,6 +56,8 @@ public class AutoCheckHtml {
 
     @AfterClass
     public void afterClass(){
+        logger.info("销毁browser浏览器对象");
+        browser.close();
         logger.info("销毁playwright浏览器对象");
         playwright.close();
     }
@@ -96,6 +98,8 @@ public class AutoCheckHtml {
             logger.info("case用例执行成功");
         }
 
+        logger.info("销毁page对象");
+        page.close();
         logger.info("销毁context对象");
         context.close();
     }
