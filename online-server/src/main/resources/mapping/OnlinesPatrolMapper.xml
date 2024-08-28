@@ -444,7 +444,7 @@
       AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &gt;= DATE_FORMAT(#{beginDate},'%Y-%m-%d')
       AND DATE_FORMAT(c.create_time,'%Y-%m-%d') &lt;= DATE_FORMAT(#{endDate},'%Y-%m-%d')
     </if>
-    group by c.case_id
+    group by c.case_id, o.title, c.id, c.create_time, c.states, c.failed_reason
     order by create_time desc
   </select>
   <select id="getPlanInfo"  resultMap="CaseInfoMap">
