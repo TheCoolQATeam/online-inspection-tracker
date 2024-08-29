@@ -1,6 +1,7 @@
 package com.onlines.onlineSaleTest;
 
 import cn.hutool.core.io.file.FileNameUtil;
+import cn.hutool.core.util.StrUtil;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.Geolocation;
 import com.microsoft.playwright.options.LoadState;
@@ -112,7 +113,7 @@ public class AutoCheckHtml {
         long currentTimeMillis = System.currentTimeMillis();
         // 获取当前工作目录
         String userDir = System.getProperty("user.dir");
-        String titleCleanInvalid = FileNameUtil.cleanInvalid(title);
+        String titleCleanInvalid = StrUtil.replace(FileNameUtil.cleanInvalid(title), " ", "_");
         String imageName = titleCleanInvalid.concat("_").concat(Long.toString(currentTimeMillis));
         logger.info("基准值地址"+imageName);
         // 使用String的concat()方法拼接路径
