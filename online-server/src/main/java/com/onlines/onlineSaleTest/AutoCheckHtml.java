@@ -108,13 +108,13 @@ public class AutoCheckHtml {
 
     @Description("遍历页面可用状态")
 //    @Test(priority = 0, description = "遍历页面可用状态", dataProvider = "HtmlData", retryAnalyzer = MyRetry.class)//增加重试机制
-    @Test(priority = 0, description = "遍历页面可用状态", dataProvider = "HtmlData")
+    @Test(description = "遍历页面可用状态", dataProvider = "HtmlData")
     public void testHtmlServiceability(int id, String htmlinfo, String title, String url, String dingKey, String wechatKey, String feishuKey) throws FileNotFoundException, UnknownHostException {
         page.navigate(url);
         long currentTimeMillis = System.currentTimeMillis();
         // 获取当前工作目录
         String userDir = System.getProperty("user.dir");
-        String titleCleanInvalid = StrUtil.replace(FileNameUtil.cleanInvalid(title), " ", "_");
+        String titleCleanInvalid = StrUtil.replace(StrUtil.replace(FileNameUtil.cleanInvalid(title), " ", "_"), "\t", "");
         String imageName = titleCleanInvalid.concat("_").concat(Long.toString(currentTimeMillis));
         logger.info("基准值地址"+imageName);
         // 使用String的concat()方法拼接路径
@@ -122,7 +122,7 @@ public class AutoCheckHtml {
         page.waitForLoadState(LoadState.NETWORKIDLE); // 资源下载完毕
         page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get(imagePath)));
         Assert.assertEquals(page.title(), title);
-        attachment("H5页面信息截图", new FileInputStream(imagePath));
+//        attachment("H5页面信息截图", new FileInputStream(imagePath));
 
         //TODO存库
         OnlinesPatrol onlinesPatrol = onlinesPatrolMapper.selectByPrimaryKey(id);
