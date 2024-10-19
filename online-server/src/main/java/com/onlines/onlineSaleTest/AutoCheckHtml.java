@@ -12,17 +12,13 @@ import com.onlines.mapper.OnlinesPatrolMapper;
 import com.onlines.pojo.CaseResponse;
 import com.onlines.utils.*;
 import com.onlines.pojo.OnlinesPatrol;
-import io.qameta.allure.Attachment;
-import io.qameta.allure.Description;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
@@ -31,8 +27,6 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import static io.qameta.allure.Allure.attachment;
 
 
 /**
@@ -106,7 +100,7 @@ public class AutoCheckHtml {
         context.close();
     }
 
-    @Description("遍历页面可用状态")
+//    @Description("遍历页面可用状态")//使用allure 报告
 //    @Test(priority = 0, description = "遍历页面可用状态", dataProvider = "HtmlData", retryAnalyzer = MyRetry.class)//增加重试机制
     @Test(description = "遍历页面可用状态", dataProvider = "HtmlData")
     public void testHtmlServiceability(int id, String htmlinfo, String title, String url, String dingKey, String wechatKey, String feishuKey) throws FileNotFoundException, UnknownHostException {

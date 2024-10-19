@@ -6,29 +6,17 @@ import com.microsoft.playwright.options.LoadState;
 import com.onlines.listeners.MyReporter;
 import com.onlines.mapper.CaseResponseMapper;
 import com.onlines.mapper.OnlinesPatrolMapper;
-import com.onlines.pojo.OnlinesPatrol;
-import com.onlines.utils.DingUtil;
-import com.onlines.utils.FeishuUtil;
 import com.onlines.utils.MyRetry;
-import com.onlines.utils.WechatUtil;
-import io.qameta.allure.Attachment;
-import io.qameta.allure.Description;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Date;
 
-import static io.qameta.allure.Allure.attachment;
 
 @Listeners({MyReporter.class})
 @SpringBootTest(classes = com.onlines.onlineSaleTest.AutoCheckHtml.class)
@@ -52,8 +40,8 @@ public class AutoCheckResponse {
             .setPermissions(Arrays.asList("geolocation")));
     Page page = context.newPage();
 
-    @Description("遍历页面可用状态")
-    @Attachment
+//    @Description("遍历页面可用状态")
+//    @Attachment
     @Test(priority = 0, description = "遍历页面可用状态", dataProvider = "HtmlData", retryAnalyzer = MyRetry.class)
     public void testHtmlServiceability(int id, String htmlinfo, String title, String url, String dingKey, String wechatKey, String feishuKey) throws FileNotFoundException, UnknownHostException {
 
@@ -62,7 +50,7 @@ public class AutoCheckResponse {
         page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get(htmlinfo + ".png")));
         System.out.println("页面id=" + id);
         Assert.assertEquals(page.title(), title);
-        attachment("H5页面信息截图", new FileInputStream(htmlinfo + ".png"));
+//        attachment("H5页面信息截图", new FileInputStream(htmlinfo + ".png"));
 
 
         }

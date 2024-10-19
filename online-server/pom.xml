@@ -69,12 +69,12 @@
 			<artifactId>testng</artifactId>
 			<version>6.9.10</version>
 		</dependency>
-		<dependency>
-			<groupId>io.qameta.allure</groupId>
-			<artifactId>allure-testng</artifactId>
-			<version>2.13.8</version>
-<!--			<scope>test</scope>-->
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>io.qameta.allure</groupId>-->
+<!--			<artifactId>allure-testng</artifactId>-->
+<!--			<version>2.13.8</version>-->
+<!--&lt;!&ndash;			<scope>test</scope>&ndash;&gt;-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>com.microsoft.playwright</groupId>
 			<artifactId>playwright</artifactId>
