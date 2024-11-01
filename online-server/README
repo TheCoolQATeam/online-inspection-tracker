@@ -1,7 +1,7 @@
 # 线上巡检系统
 
 ## 项目启动访问
-http://127.0.0.1:9090/patrol/onlines/selectInfo
+http://127.0.0.1:9091/patrol/onlines/selectInfo
 
 ## 区分环境配置
 https://blog.csdn.net/weixin_33005117/article/details/127872557
