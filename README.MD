@@ -1,4 +1,4 @@
-## README_en.MD
+## README_EN.MD
 - [English](README_EN.MD)
 
 ## 项目名称
