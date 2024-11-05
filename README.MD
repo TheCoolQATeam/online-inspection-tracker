@@ -73,5 +73,10 @@ Fork本项目至你的GitHub仓库。
 
 - GitHub仓库留言
 - 邮箱：zdx0122@gmail.com
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=TheCoolQATeam/online-inspection-tracker&type=Date)](https://star-history.com/#TheCoolQATeam/online-inspection-tracker&Date)
+
 ## 许可证
 本项目采用Apache许可证。在使用本项目时，请遵守相关许可协议。
