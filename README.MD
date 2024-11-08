@@ -74,8 +74,10 @@ Fork本项目至你的GitHub仓库。
 ## 联系方式
 如有任何疑问、建议或需求，欢迎通过以下方式与我们联系：
 
-- GitHub仓库留言
+- GitHub仓库提交ISSUE
 - 邮箱：zdx0122@gmail.com
+- 微信群交流
+  ![微信群](https://img.1024996.xyz/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241108123621.jpg)
 
 ## Star History
 
