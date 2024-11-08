@@ -1,5 +1,5 @@
 
-FROM openjdk:8u342
+FROM openjdk:8-jre
 
 # 切换apt源为http清华源
 RUN echo "deb http://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-free" > /etc/apt/sources.list && \
@@ -35,7 +35,7 @@ RUN dpkg -i /google-chrome-stable_current_amd64.deb
 
 MAINTAINER inspection
 EXPOSE 9091
-LABEL version="1.0.1" description="moonbox springboot镜像" by="inspection"
+LABEL version="1.0.1" description="线上巡检server镜像" by="inspection"
 
 COPY onlineInspect.jar /inspection/
 
