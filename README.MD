@@ -77,7 +77,8 @@ Fork本项目至你的GitHub仓库。
 - GitHub仓库提交ISSUE
 - 邮箱：zdx0122@gmail.com
 - 微信群交流
-  ![微信群](https://img.1024996.xyz/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20241108123621.jpg)
+
+  ![微信群](https://img.1024996.xyz/wechatQR-1115.png)
 
 ## Star History
 
