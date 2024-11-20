@@ -78,7 +78,7 @@ Fork本项目至你的GitHub仓库。
 - 邮箱：zdx0122@gmail.com
 - 微信群交流
 
-  ![微信群](https://img.1024996.xyz/wechatQR-1115.png)
+  ![微信群](https://img.1024996.xyz/wechatQR-20241120.png)
 
 ## Star History
 
