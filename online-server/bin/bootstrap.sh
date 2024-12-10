@@ -1,11 +1,11 @@
 #!/bin/sh
-# ./ry.sh start 启动 stop 停止 restart 重启 status 状态
+# ./bootstrap.sh start 启动 stop 停止 restart 重启 status 状态 package 打包构建
 AppName=onlineInspect.jar
 
 # JVM参数
 JVM_OPTS="-Dname=$AppName  -Duser.timezone=Asia/Shanghai -Xms512m -Xmx1024m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -XX:+PrintGCDateStamps  -XX:+PrintGCDetails -XX:NewRatio=1 -XX:SurvivorRatio=30 -XX:+UseParallelGC -XX:+UseParallelOldGC"
 APP_HOME=`pwd`
-LOG_PATH=$APP_HOME/logs/$AppName.log
+LOG_PATH=$APP_HOME/$AppName.log
 
 if [ "$1" = "" ];
 then
@@ -27,7 +27,7 @@ function start()
 	    echo "$AppName is running..."
 	else
 	  BUILD_ID=dontKillMe
-		nohup java $JVM_OPTS -jar ./target/$AppName --spring.profiles.active=test> /dev/null 2>&1 &
+		nohup java $JVM_OPTS -jar ../target/$AppName >> $LOG_PATH 2>&1 &
 		echo "Start $AppName success..."
 	fi
 }
@@ -76,7 +76,8 @@ function status()
 function package()
 {
   stop
-  /opt/soft/apache-maven-3.2.5/bin/mvn clean package -Ptest -Dmaven.test.skip=true
+  cd ..
+  mvn clean package -Dmaven.test.skip=true
 }
 
 case $1 in
