@@ -145,7 +145,7 @@ public class AutoCheckHtml {
                     String ip = InetAddress.getLocalHost().getHostAddress();
                     logger.info("服务器IP地址：" + ip);
 //                    http://localhost:9091/patrol/onlines/images?imageName=%E7%99%BE%E5%BA%A6%E4%B8%80%E4%B8%8B%E5%93%88%E5%93%88%E5%95%8A_1714287034960
-                    String picUrl = "http://" + ip + ":9091/patrol/onlines/images?imageName=" + imageName;
+                    String picUrl = "http://" + ip + ":9091/patrol/onlines/images?imageName=" + imageName + ".png";
                     DingUtil.sendMsgPic(url, id, picUrl, title, dingKey);
                     WechatUtil.sendMsgPic(url, id, picUrl, title, wechatKey);
                     FeishuUtil.sendMsgPic(url, id, picUrl, title, feishuKey);
