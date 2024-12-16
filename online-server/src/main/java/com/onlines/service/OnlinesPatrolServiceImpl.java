@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.onlines.controller.OnlinesSaleController;
 import com.onlines.entiry.CaseInfoDto;
 import com.onlines.entiry.DataReqDto;
 import com.onlines.entiry.OnlineSaleDto;
@@ -21,7 +20,7 @@ import java.util.Date;
 
 @Service
 public class OnlinesPatrolServiceImpl implements IOnlinesPatrolService {
-    private static final Logger logger= LoggerFactory.getLogger(OnlinesSaleController.class);
+    private static final Logger logger= LoggerFactory.getLogger(OnlinesPatrolServiceImpl.class);
     @Autowired
     private OnlinesPatrolMapper onlinesPatrolMapper;
 

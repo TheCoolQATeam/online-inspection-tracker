@@ -1,6 +1,5 @@
 package com.onlines.listeners;
 
-import com.onlines.controller.OnlinesSaleController;
 import com.onlines.mapper.PlanResultTestMapper;
 import com.onlines.onlineSaleTest.SpringWrapper;
 import com.onlines.pojo.PlanResultTest;
@@ -17,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class MyReporter implements IReporter {
-    private static final Logger logger= LoggerFactory.getLogger(OnlinesSaleController.class);
+    private static final Logger logger= LoggerFactory.getLogger(MyReporter.class);
     private static PlanResultTestMapper testPlanResultMapper = SpringWrapper.getBean(PlanResultTestMapper.class);
 
     private int testsPass = 0;

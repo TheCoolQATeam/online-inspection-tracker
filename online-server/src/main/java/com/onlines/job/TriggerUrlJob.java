@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class TriggerUrlJob implements InitializingBean {
-    private static final Logger logger= LoggerFactory.getLogger(OnlinesSaleController.class);
+    private static final Logger logger= LoggerFactory.getLogger(TriggerUrlJob.class);
     @Autowired
     private OnlinesSaleController onlinesSaleController;
 

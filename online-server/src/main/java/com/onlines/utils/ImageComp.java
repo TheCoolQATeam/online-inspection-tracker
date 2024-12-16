@@ -1,6 +1,5 @@
 package com.onlines.utils;
 
-import com.onlines.controller.OnlinesSaleController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +9,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 
 public class ImageComp {
-    private static final Logger logger= LoggerFactory.getLogger(OnlinesSaleController.class);
+    private static final Logger logger= LoggerFactory.getLogger(ImageComp.class);
     // 改变成二进制码
     public static String[][] getPX(String args) throws MalformedURLException {
         logger.info("getPX:" + args);

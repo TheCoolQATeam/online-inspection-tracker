@@ -5,7 +5,6 @@ import cn.hutool.core.util.StrUtil;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.Geolocation;
 import com.microsoft.playwright.options.LoadState;
-import com.onlines.controller.OnlinesSaleController;
 import com.onlines.listeners.MyReporter;
 import com.onlines.mapper.CaseResponseMapper;
 import com.onlines.mapper.OnlinesPatrolMapper;
@@ -34,7 +33,7 @@ import java.util.List;
  */
 @Listeners({MyReporter.class})
 public class AutoCheckHtml {
-    private static final Logger logger= LoggerFactory.getLogger(OnlinesSaleController.class);
+    private static final Logger logger= LoggerFactory.getLogger(AutoCheckHtml.class);
     ImageComp imageComp = new ImageComp();
     private static OnlinesPatrolMapper onlinesPatrolMapper = SpringWrapper.getBean(OnlinesPatrolMapper.class);
     private static CaseResponseMapper caseResponseMapper = SpringWrapper.getBean(CaseResponseMapper.class);

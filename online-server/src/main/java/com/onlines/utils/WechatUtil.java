@@ -2,12 +2,11 @@ package com.onlines.utils;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import com.alibaba.fastjson.JSONObject;
-import com.onlines.controller.OnlinesSaleController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
 public class WechatUtil {
-    private static final Logger logger= LoggerFactory.getLogger(OnlinesSaleController.class);
+    private static final Logger logger= LoggerFactory.getLogger(WechatUtil.class);
     public static String setMsgContent(ITestResult result){
         String caseDescription = result.getMethod().getDescription();
         Object[] caseParameters = result.getParameters();

@@ -1,6 +1,5 @@
 package com.onlines.config;
 
-import com.onlines.controller.OnlinesSaleController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +10,7 @@ import java.io.IOException;
 
 @WebFilter(filterName = "corsFilter")
 public class CORSFilter implements Filter{
-    private static final Logger logger= LoggerFactory.getLogger(OnlinesSaleController.class);
+    private static final Logger logger= LoggerFactory.getLogger(CORSFilter.class);
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         logger.info("初始化filter==========================");
