@@ -76,9 +76,10 @@ Fork本项目至你的GitHub仓库。
 
 - GitHub仓库提交ISSUE
 - 邮箱：zdx0122@gmail.com
+- 微信号：zdx0122,请备注“开源巡检”
 - 微信群交流
 
-  ![微信群](https://img.1024996.xyz/wechatQR-20241209.png)
+  ![微信群](https://img.1024996.xyz/wechatQR-20241231.jpg)
 
 ## Star History
 
