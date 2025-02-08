@@ -7,7 +7,7 @@
 ## 简介
 本项目是一个线上UI自动化巡检工具，旨在帮助开发人员和测试人员快速、高效地检测线上Web应用的UI界面是否存在异常。通过自动化巡检，可以及时发现并修复潜在的问题，提升用户体验和产品质量。
 
-## demo
+## 共享巡检资源
 - 地址1： https://check.itest.ren/ @zdx0122
 - 地址2： https://check.aolifu.org/ @Oliverwqcwrw
 - 
