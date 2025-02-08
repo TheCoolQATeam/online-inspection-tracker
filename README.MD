@@ -8,7 +8,8 @@
 本项目是一个线上UI自动化巡检工具，旨在帮助开发人员和测试人员快速、高效地检测线上Web应用的UI界面是否存在异常。通过自动化巡检，可以及时发现并修复潜在的问题，提升用户体验和产品质量。
 
 ## demo
-- 地址：https://check.itest.ren/ @zdx0122
+- 地址1： https://check.itest.ren/ @zdx0122
+- 地址2： https://check.aolifu.org/ @Oliverwqcwrw
 - 
 - 欢迎各位开发者提供已部署的项目供大家访问使用，共享巡检资源
 
@@ -79,7 +80,7 @@ Fork本项目至你的GitHub仓库。
 - 微信号：zdx0122,请备注“开源巡检”
 - 微信群交流 
   - 扫码加入 / 添加微信zdx0122拉群（请备注：巡检开源）
-  - ![微信群](https://img.1024996.xyz/wechatQR-20250108.png)
+  - ![微信群](https://img.1024996.xyz/wechatQR-20250208.png)
 
 ## Star History
 
